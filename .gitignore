@@ -48,7 +48,3 @@
 *.swp
 *.dvi
 *.ps
-*.pdf
-
-# Exclude PDF files
-!*.pdf
