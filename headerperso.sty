@@ -1,0 +1,12 @@
+\ProvidesPackage{headerperso}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{nameref}
+
+% Configuration de fancyhdr pour l'en-tête
+\pagestyle{fancy}
+\fancyhf{} % Efface tous les en-têtes et pieds de page actuels
+
+% En-tête gauche : NOM Prénom
+\fancyhead[L]{\textit{Maxence Jauberty}}
+\fancyhead[R]{\textit{\nouppercase{\rightmark}}}
