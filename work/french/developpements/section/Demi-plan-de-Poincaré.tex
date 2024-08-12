@@ -1,6 +1,23 @@
-\documentclass[work\french\developpements\main.tex]{subfiles}
+\documentclass[..\main.tex]{subfiles}
 
 \begin{document}
 \section{Demi-plan de Poincaré}
-bla bla bla
+
+\begin{definition}
+    On appelle \emph{demi-plan de Poincaré} l'ensemble suivant
+    \begin{equation}
+        \mathcal{H} = \{ z \in \mathbb{C} \mid \Im(z) > 0 \}\cup \{\infty\}.
+    \end{equation}
+\end{definition}
+Sur le demi-plan de Poincaré, les droites, ou plus exactement les géodésiques, 
+sont définies comme les demi-cercles dont le centre est sur l'axe des réels et
+les droites verticales, i.e. les droites passant par $\infty$.
+\begin{figure}
+    \begin{tikzpicture}
+        \draw[->] (-2,0) -- (4,0);
+        \draw[->] (0,-2) -- (0,4);
+        \draw[red] (1,-2) -- (1,4);
+        \draw[blue] (3,0) arc (3:180:1);
+    \end{tikzpicture}
+\end{figure}
 \end{document}

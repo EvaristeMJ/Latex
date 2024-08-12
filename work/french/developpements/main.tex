@@ -6,13 +6,15 @@
 \usepackage{tikz-cd}
 \usepackage{hyperref}
 
-\newtheorem{theorem}{Théorème}
-\newtheorem{lemma}{Lemme}
-\newtheorem{corollary}{Corollaire}
-\newtheorem{definition}{Définition}
-\newtheorem{proposition}{Proposition}
-\newtheorem{remark}{Remarque}
-\newtheorem{example}{Exemple}
+\usepackage{mdframed}
+
+\newmdtheoremenv{theorem}{Théorème}
+\newmdtheoremenv{lemma}{Lemme}
+\newmdtheoremenv{corollary}{Corollaire}
+\newmdtheoremenv{definition}{Définition}
+\newmdtheoremenv{proposition}{Proposition}
+\newmdtheoremenv{remark}{Remarque}
+\newmdtheoremenv{example}{Exemple}
 
 \begin{document}
 \author{Maxence Jauberty}
