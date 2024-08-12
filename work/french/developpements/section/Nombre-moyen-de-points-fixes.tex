@@ -1,5 +1,30 @@
 \documentclass[..\main.tex]{subfiles}
 \begin{document}
 \section{Nombre moyen de points fixes}
+On considère la variable aléatoire \(\Sigma\) sur les permutations de \([n]\) qui suit une loi uniforme, i.e. \(\forall \sigma\in \mathfrak{S}_n,\mathbb{P}(\Sigma = \sigma) = \frac{1}{n!}\).
+Notons \(P(\Sigma)\) la variable aléatoire qui compte le nombre de points fixes de \(\Sigma\). 
+Nous souhaitons calculer l'espérance de \(P(\Sigma)\), ainsi que sa variance.
+
+Nous rappelons que \(\mathfrak{S}_n\) est un groupe agissant sur \([n]\). Dès lors, nous pouvons espérer utiliser la théorie des actions de groupes.
+
+
+Si on considère un groupe fini \(G\) agissant sur un ensemble \(X\), on note \(X/G\) l'ensemble des orbites de \(X\) sous l'action de \(G\)
+ et \(\mathrm{Fix}(g)\) l'ensemble \(\{x\in X,\; g.x = x\}\).
+ Nous rappelons la formule de Burnside.
+\begin{theorem}
+    Soit \(G\) un groupe fini agissant sur un ensemble fini \(X\). On a alors
+    \begin{equation}
+        \lvert X/G\rvert = \frac{1}{\lvert G\rvert}\sum_{g\in G}\lvert \mathrm{Fix}(g)\rvert.
+    \end{equation}
+\end{theorem}
+On peut réécrire cette formule dans le cas où \(X = [n]\) et \(G = \mathfrak{S}_n\). On a alors
+\begin{equation}
+    \lvert [n]/\mathfrak{S}_n\rvert = \sum_{\sigma\in \mathfrak{S}_n} \frac{P(\sigma)}{n!} = \mathbb{E}(P(\Sigma)).
+\end{equation}
+Rappelons que l'action de \(\mathfrak{S}_n\) sur \([n]\) est transitive, i.e. pour tout couple \(i,j\) il existe \(\sigma\in \mathfrak{S}_n\) tel que \(\sigma(x)=y\). Dès lors, on a \(\lvert [n]/\mathfrak{S}_n\rvert = 1\).
+On en déduit alors que 
+\begin{equation}
+    \mathbb{E}(P(\Sigma)) = 1.
+\end{equation}
 
 \end{document}
