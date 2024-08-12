@@ -11,13 +11,24 @@
 \end{definition}
 Sur le demi-plan de Poincaré, les droites, ou plus exactement les géodésiques, 
 sont définies comme les demi-cercles dont le centre est sur l'axe des réels et
-les droites verticales, i.e. les droites passant par $\infty$.
+les droites verticales, i.e. les droites passant par $\infty$. On notera \(\mathcal{D}\)
+l'ensemble de ces géodésiques.
 \begin{figure}
     \begin{tikzpicture}
         \draw[->] (-2,0) -- (4,0);
         \draw[->] (0,-2) -- (0,4);
-        \draw[red] (1,-2) -- (1,4);
-        \draw[blue] (3,0) arc (3:180:1);
+        \draw[red] (0.5,-2) -- (0.5,4);
+        \draw[blue] (3,0) arc (0:180:1);
     \end{tikzpicture}
+    \caption{Exemple de géodésiques sur le demi-plan de Poincaré, à noter que les points qui sont sur l'axe des réels sont exclus des géodésiques.}
 \end{figure}
+On considère l'ensemble des transformations projectives inversibles, soit l'ensemble \(PGL_2(\mathbb{R})\).
+De telles transformations ont la propriété de "préserver" l'infini. Autrement dit, pour 
+\(f \in PGL_2(\mathbb{R})\), on a \(f(\infty) = \infty\). Pour tout autre point de \(\mathbb{P}_1(\mathbb{C})\),
+\(f\) peut être considérée comme une transformation linéaire. On parle alors de \emph{transformation de Moebius}.
+\begin{lemma} Soient \(z,w\in \mathcal{H}\), il existe une unique droite géodésique de \(\mathcal{H}\) passant par \(z\) et \(w\).
+\end{lemma}
+\begin{proposition} \(PSL_2(\mathbb{R})\) agit sur \(\mathcal{H}\). De plus,
+    il agit transitivement. 
+\end{proposition}
 \end{document}
