@@ -1,0 +1,75 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Lemme de Zolotarev}
+Si \(X\) est un ensemble fini quelconque, nous notons \(\mathfrak{S}_X\) le groupe des permutations de \(X\).
+Nous rappelons qu'il existe un unique morphisme surjectif \(\epsilon : \mathfrak{S}_X \longrightarrow \{-1,1\}\)
+appelé signature. 
+\begin{theorem} Il existe un unique morphisme signature de \(\mathfrak{S}_X\).
+\end{theorem}
+\begin{proof}
+    On commence par montrer l'existence. On note \(n = \lvert X \rvert\) et on considère l'application suivante
+    \begin{equation}
+        \Delta : \begin{cases}
+            \mathbb{Z}^n & \longrightarrow \{-1,1\}\\
+            (x_1,\ldots,x_n) & \longmapsto \prod_{1\le i<j \le n}^n x_j -x_i.
+        \end{cases}
+    \end{equation}
+    On peut faire agir \(\mathfrak{S}_n\) sur l'ensemble des applications \(\mathbb{Z}^n\to \mathbb{Z}\) par l'action suivante
+    \begin{equation}
+        \sigma \cdot f (x_1, \ldots, x_n) = f(x_{\sigma(1)},\ldots, x_{\sigma(n)}).
+    \end{equation}
+    On remarque ensuite que l'action d'une transposition sur \(\Delta\) est d'en changer le signe.
+    \begin{lemma}
+        Soit \(\tau\) une transposition, alors \(\tau \cdot \Delta = -\Delta\).
+    \end{lemma}
+    On peut ensuite définir le morphisme \(\epsilon_n\) comme le signe de \(\Delta\).
+    Celui-ci est bien un morphisme car pour une transposition \(\tau\), on a 
+    \begin{equation}
+        \epsilon_n(\sigma\tau) = \epsilon_n(\sigma)\epsilon_n(\tau) = -\epsilon_n(\sigma).
+    \end{equation}
+    Or \(\mathfrak{S}_n\) est engendré par les transpositions, donc \(\epsilon_n\) est bien un morphisme de groupes.
+    Par ailleurs, il est bien surjectif puisque \(\epsilon_n(\tau) = -1\).
+    \\
+    Il existe un isomorphisme de groupes entre \(\mathfrak{S}_X\) et \(\mathfrak{S}_n\). On note \(f\) un isomorphisme entre ces deux groupes.
+    On peut donc définir \(\epsilon = f\circ \epsilon_n\) qui est un morphisme signature.
+    \\
+
+    Montrons que ce morphisme est unique. Soit \(\epsilon'\) un autre morphisme signature non trivial, i.e. \(\epsilon'(\tau) = -1\).
+    Puisque \(\mathfrak{S}_X\) est engendré par les transpositions, il existe pour \(\sigma\in \mathfrak{S}_X\) une suite de transpositions \(\tau_1,\ldots, \tau_k\) telles que \(\sigma = \tau_1\ldots \tau_k\).
+    On a alors
+    \begin{equation}
+        \epsilon'(\sigma) = \epsilon'(\tau_1)\ldots \epsilon'(\tau_k) = (-1)^k = \epsilon(\sigma).
+    \end{equation}
+\end{proof}
+Le lemme de Zolotarev est une conséquence directe de ce théorème.
+\begin{theorem} Soit \(p\) premier et \(a\in \Z/p\Z^\times\), on définit \(\mathfrak{m}_a\) comme la multiplication par \(a\) dans \(\Z/p\Z^\times\), i.e.
+    \begin{equation}
+        \mathfrak{m}_a : \begin{cases}
+            \Z/p\Z^\times & \longrightarrow \Z/p\Z^\times\\
+            x & \longmapsto ax.
+        \end{cases}
+    \end{equation}
+    Alors, \(\mathfrak{m}_a\) est une permutation de \(\Z/p\Z^\times\) de signature \(\epsilon(\mathfrak{m}_a) = \left(\frac{a}{p}\right)\).
+\end{theorem}
+\begin{proof} \(\mathfrak{m}_a\) est une permutation car \(\Z/p\Z\) est un corps, la bijection inverse est alors \(\mathfrak{m}_{a^{-1}}\).
+
+    On peut ensuite remarquer que le symbole de Legendre est un morphisme de groupes de \(\Z/p\Z^\times\) dans \(\{-1,1\}\) non trivial et surjectif.
+    Cela conclut la preuve : \(\epsilon(\mathfrak{m}_a) = \left(\frac{a}{p}\right)\).
+\end{proof}
+Le lemme de Zolotarev permet de faire un pont entre la théorie des nombres et la théorie des permutations.
+Si on considère, par exemple, \(\mathfrak{m}_2\) peut se représenter comme la permutation suivante
+\begin{equation}
+    \begin{pmatrix}
+        1 & 2 &  \ldots & \frac{p-1}{2} & \frac{p+1}{2}  & \ldots & p-2 & p-1\\
+        2 & 4 &  \ldots & p-1 & p+1 & \ldots & p-4 & p-2
+    \end{pmatrix}.
+\end{equation}
+On remarque que l'inversion se fait à partir de \(\frac{p+1}{2}\) et \(\epsilon(\mathfrak{m}_2) = (-1)^{\text{nb d'inversion}}\) donc
+\begin{equation}
+    \epsilon(\mathfrak{m}_2) = (-1)^{\frac{p-1}{2}+\ldots + 2 + 1}.
+\end{equation}
+Il ne suffit que de calculer, \(\frac{p-1}{2}+\ldots + 2 + 1 = \frac{p^2-1}{8}\), d'où
+\begin{equation}
+    \left(\frac{2}{p}\right) = \epsilon(\mathfrak{m}_2) = (-1)^{\frac{p^2-1}{8}}.
+\end{equation}
+\end{document}
