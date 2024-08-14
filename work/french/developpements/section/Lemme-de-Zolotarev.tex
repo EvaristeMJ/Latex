@@ -72,4 +72,64 @@ Il ne suffit que de calculer, \(\frac{p-1}{2}+\ldots + 2 + 1 = \frac{p^2-1}{8}\)
 \begin{equation}
     \left(\frac{2}{p}\right) = \epsilon(\mathfrak{m}_2) = (-1)^{\frac{p^2-1}{8}}.
 \end{equation}
+\subsection*{Une application}
+On peut utiliser le lemme de Zolotarev pour démontrer la loi de réciprocité quadratique. 
+\begin{theorem} Soit \(p\) et \(q\) deux nombres premiers impairs, alors
+    \begin{equation}
+        \left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}.
+    \end{equation}
+\end{theorem}
+\begin{proof} D'abord, nous considérons l'isomorphisme \(\phi : \Z_{pq}\longrightarrow \Z_p \times \Z_q\).
+    On considère les deux permutations suivantes 
+    \begin{align}
+        \sigma &: \begin{cases}
+            \Z_p \times \Z_q & \longrightarrow \Z_p \times \Z_q\\
+            (x,y) & \longmapsto (qx + y,y)
+        \end{cases}\\
+        \tau &: \begin{cases}
+            \Z_p \times \Z_q & \longrightarrow \Z_p \times \Z_q\\
+            (x,y) & \longmapsto (x,py + x)
+        \end{cases}.
+    \end{align}
+    On définit ensuite \(\rho\) sur \(\Z_{pq}\) par \(\rho(x+qy) = px+y\). On peut alors remarquer que
+    \begin{equation}
+        \phi(qx+y) = (qx+y,y) = \sigma(x,y) \text{ et } \phi(px+y) = (x,py+x) = \tau(x,y).
+    \end{equation}
+    Ainsi, \(qx+y = \phi^{-1}(\sigma(x,y))\) et en appliquant \(\rho\), on obtient 
+    \(\rho(\phi^{-1}(\sigma(x,y))) = px+y\). Finalement, en appliquant \(\phi\), déduit l'égalité suivante
+    \begin{equation}
+        \phi\circ \rho \circ \phi^{-1} \circ \sigma = \tau.
+    \end{equation}
+    Désormais, on peut considère les signatures de ces permutations.
+    \begin{equation}
+        \epsilon(\phi\circ \rho \circ \phi^{-1})\epsilon(\sigma) = \epsilon(\tau).
+    \end{equation}
+    On sait que \(\epsilon(\sigma) = \left(\frac{q}{p}\right)\) et \(\epsilon(\tau) = \left(\frac{p}{q}\right)\).
+    (A faire) De plus, \(\epsilon(\phi\circ \rho \circ \phi^{-1}) = (-1)^{\frac{(p-1)(q-1)}{4}}\), d'où la loi de réciprocité 
+    \begin{equation}
+        \left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}.
+    \end{equation}
+\end{proof}
+\subsection*{Une généralisation}
+\begin{theorem} Soit \(E\) un espace vectoriel sur un corps fini \(\F_p\), alors pour tout
+    automorphisme \(u\) de \(E\), on a
+    \begin{equation}
+        \epsilon(u) = \left(\frac{\det(u)}{p}\right).
+    \end{equation}
+    où \(\epsilon\) est le morphisme signature de \(GL(E)\).
+\end{theorem}
+\begin{proof} Remarquons que \(SL(E)\) est le groupe dérivé de \(GL(E)\). On en déduit que
+    tout morphisme de \(GL(E)\) vers un groupe abélien se factorise à travers l'abélianisé \(GL(E)/SL(E)\).
+    En particulier, si nous considérons le morphisme signature de \(\mathfrak{S}_E\), nous avons l'existence
+    de \(f : \F_p^\times \longrightarrow \{-1,1\}\) tel que \(\epsilon = f\circ \det\) sur \(GL(E)\).
+
+    De plus, \(f\) n'est pas un morphisme trivial, on peut, par exemple, prendre la multiplication par
+    un élément générateur de \(\F_p^\times\). Cet automorphisme est une permutation circulaire, ce qui permet simplement de déterminer que sa signature est \(-1\).
+    On en déduit que \(f\) n'est pas le morphisme trivial, donc \(f = \left(\frac{.}{p}\right)\) par unicité du symbole de Legendre.
+    D'où 
+    \begin{equation}
+        \epsilon(u) = \left(\frac{\det(u)}{p}\right).
+    \end{equation}
+\end{proof}
+
 \end{document}
