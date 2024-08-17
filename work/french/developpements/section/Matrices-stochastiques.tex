@@ -1,0 +1,46 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Matrices stochastiques}
+\begin{definition} Une matrice \(M\in\mathcal{M}_n(\R)\) est dite stochastique si elle vérifie les conditions suivantes
+    \begin{enumerate}
+        \item \(M_{ij}\ge 0\) pour tout \(i,j\in\{1,\ldots,n\}\).
+        \item \(\sum_{j=1}^n M_{ij} = 1\) pour tout \(i\in\{1,\ldots,n\}\).
+    \end{enumerate}
+    \begin{remark} Les matrices stochastiques sont souvent utilisées pour modéliser des chaînes de Markov en probabilités.
+    \end{remark}
+\end{definition}
+En particulier, on peut définir une relation d'équivalence sur les états possibles de la chaîne de Markov associée à une matrice stochastique.
+\begin{definition} Soit \(M\) une matrice stochastique, on définit la relation d'équivalence \(\longleftrightarrow\) sur \(\{1,\ldots,n\}\) par
+    \begin{equation}
+        i\leftrightarrow j \iff \exists k,k'\in\N, (e_iM^k)_j>0 \text{ et } (e_jM^{k'})_i>0.
+    \end{equation}
+    On dit alors que \(i\) et \(j\) communiquent.
+    \begin{remark} Si on considère un vecteur de probabilité \(\nu_k\) qui représente la loi des états de la chaîne à un étape \(k\),
+        alors \(\nu_{k+1} =  \nu_kM\). On en déduit que \(\nu_{k} = \nu_0M^k\). Si \(\nu_0 = e_i\), alors on étudie la chaîne qui part de l'état \(i\), idem pour \(j\).
+        Si \(i\longleftrightarrow j\), alors il est possible de passer de \(i\) à \(j\) en un nombre fini d'étapes, et réciproquement.
+    \end{remark}
+\end{definition}
+\begin{definition} Soit \(M\) une matrice stochastique, elle est dite irréductible s'il n'existe qu'une unique classe d'équivalence pour
+    la relation \(\longleftrightarrow\).
+    \begin{remark}
+        On peut montrer que si \(M\) est irréductible, alors pour tout \(i,j\in\{1,\ldots,n\}\), il existe \(k\in\N\) tel que \((e_iM^k)_j>0\).
+        C'est une conséquence directe de la définition d'irréductibilité. On retrouve la définition \textit{classique} de l'irréductibilité.
+    \end{remark}
+\end{definition}
+En particulier, une propriété intéressante pour l'étude des chaînes de Markov est l'invariance de la mesure de probabilité.
+Dans le cas fini, comme nous l'étudions, cela revient le "bon" vecteur de probabilité initial qui assure la stabilité de la mesure.
+\begin{equation}
+    \nu M = \nu.
+\end{equation}
+Le problème de trouver une telle distibution initiale est finalement une recherche de vecteur propre associé à la valeur propre \(1\).
+Nous allons montrer par le théorème de Perron-Frobenius qu'une chaîne de Markov irréductible admet un tel vecteur propre, unique à une constante près.
+\begin{theorem}[Perron-Frobenius] Soit \(M\) une matrice stochastique irréductible, alors
+    \begin{enumerate}
+        \item \(1\) est valeur propre de \(M\).
+        \item Il existe un unique vecteur propre à coefficients positifs de \(M\) associé à la valeur propre \(1\) à une constante près.
+        \item Toutes les valeurs propres de \(M\) sont de module strictement inférieur à \(1\).
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\end{proof}
+\end{document}
