@@ -1,0 +1,48 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Formule de Mobius et dénombrements des polynômes irréductibles}
+\begin{definition} Soit \(n\in\N\), on définit la fonction de Möbius \(\mu:\N\to\Z\) par
+    \begin{equation}
+        \mu(n) = \begin{cases}
+            0 & \text{si } n \text{ n'est pas produit de carrés,}\\
+            (-1)^k & \text{si } n \text{ est produit de } k \text{ nombres premiers distincts.}
+        \end{cases}
+    \end{equation}
+\end{definition}
+\begin{proposition} Soit \(n\ge 2\), alors
+    \begin{equation}
+        \sum_{d|n} \mu(d) = 0.
+    \end{equation}
+\end{proposition}
+\begin{proof} On décompose \(n\) en produit de facteurs premiers 
+    \begin{equation}
+        n = \prod_{i=1}^k p_i^{\alpha_i}.
+    \end{equation}
+    On peut ensuite décomposer la somme, en tenant compte que \(\mu(d) = 0\) si deux diviseurs premiers divisent \(d\),
+    \begin{align}
+        \sum_{d|n} &= \mu(1) + \sum_{i=1}^k \mu(p_i) + \sum_{i\neq j} \mu(p_ip_j) + \ldots + \mu(p_1\ldots p_n)\\
+        &= \sum_{k=0}^n (-1)^k \binom{n}{k}\\ 
+        &= 0.
+    \end{align}
+\end{proof}
+\begin{theorem}[Formule d'inversion de Möbius] Soit \(f\) une fonction arithmétique, on pose 
+    \(g(n) = \sum_{d|n} f(d)\). Alors, on a
+    \begin{equation}
+        f(n) = \sum_{d|n}\mu\left(\frac{n}{d}\right) g(d) = \sum_{d|n}\mu(d)g\left(\frac{n}{d}\right).
+    \end{equation}
+\end{theorem}
+\begin{proof} On a
+    \begin{align}
+        \sum_{d|n}\mu(d)g\left(\frac{n}{d}\right) & = \sum_{d|n}\mu(d)\sum_{e|\frac{n}{d}}f(e)\\
+        & = \sum_{de|n}f(e)\mu(d)\\
+        & = \sum_{e|n}f(e)\sum_{d|\frac{n}{e}}\mu(d)\\
+        & = f(n).
+    \end{align}
+    car \(\sum_{d|\frac{n}{e}}\mu(d)\) vaut \(0\) si \(e\neq n\) et \(1\) sinon.
+\end{proof}
+\subsection*{Application aux dénombrements de polynômes irréductibles sur \(\F_q\)}
+\begin{definition} Soit \(\K\) un corps, un polynôme \(f\) de \(\K[x]\) est dit irréductible si
+    il n'est pas le produit de deux polynômes non inversibles de \(\K[x]\), i.e.
+
+\end{definition}
+\end{document}
