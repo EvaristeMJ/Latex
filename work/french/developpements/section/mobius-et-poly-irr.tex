@@ -43,6 +43,64 @@
 \subsection*{Application aux dénombrements de polynômes irréductibles sur \(\F_q\)}
 \begin{definition} Soit \(\K\) un corps, un polynôme \(f\) de \(\K[x]\) est dit irréductible si
     il n'est pas le produit de deux polynômes non inversibles de \(\K[x]\), i.e.
-
+\begin{equation}
+    f = gh \implies g\in  \K[x]^\times\text{ ou } h\in \K[x]^\times.
+\end{equation}
 \end{definition}
+\begin{proposition}\label{prodirr} Soit \(q\) une puissance d'un nombre premier. On note \(I(n,q)\) 
+    l'ensemble des polynômes irréductibles unitaires de degré \(n\) sur \(\F_q\). Alors, on a 
+    \begin{equation}
+        x^{q^n} - x = \prod_{d|n}\left(\prod_{f\in I(d,q)}f\right)
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    Soit \(d|n\), on considère \(g \in I(d,q)\). On considère ensuite \(K\) le corps
+    de rupture de \(g\) sur \(\F_q\). \(K\) est une extension de degré \(d\) qui sera isomorphe
+    à \(\F_{q^d}\), en considérant \(K\) comme \(\F_q-\)ev de dimension \(d\) (en prenant \(\alpha\) comme élément primitif).
+    On sait que \(\alpha^{q^d} = \alpha\) donc \(\alpha\) est une racine de \(x^{q^n}-x\). 
+    On en déduit donc que \(f\) divise \(x^{q^n} - x\).
+
+    Réciproquement, supposons que \(f\) est un facteur irréductible de \(x^{q^n} - x\).
+    On note \(d\) le degré de \(f\). Par ailleurs, \(f\) est scindé dans \(\F_{q^n}\) donc les racines de \(f\) sont dans \(\F_{q^n}\).
+    En particulier, si on considère le corps de rupture \(K\) de \(f\) sur \(F_q\), on sait que \(K\) est une extension de \(\F_q\) de degré \(d\).
+    \begin{equation}
+        \F_q \subset K\cong \F_{q^d} \subset \F_{q^n}.
+    \end{equation}
+    On peut aussi construire \(\F_{q^n}\) comme un corps de rupture pour un polynôme irréductible de degré \(k\), d'où
+    \begin{equation}
+        [\F_{q^n}:\F_q] = [\F_{q^n}:\F_{q^d}][\F_{q^d}:\F_q].
+    \end{equation}
+    D'où \(d|n\).
+\end{proof}
+\begin{theorem}
+    \begin{equation}
+        |I(n,q)| = \frac{1}{n}\sum_{d|n}\mu\left(\frac{n}{d}\right)q^{d}.
+    \end{equation}
+\end{theorem}
+\begin{proof} Utilisons la Proposition \ref*{prodirr} et comparons les degrés de chaque côté :
+    \begin{equation}
+        q^n = \sum_{d|n}|I(d,q)|d.
+    \end{equation}
+    Appliquons ensuite la formule d'inversion avec \(n\mapsto |I(n,q)|\). On en déduit que
+    \begin{equation}
+        n|I(n,q)| = \sum_{d|n}\mu\left(\frac{n}{d}\right)q^{d}.
+    \end{equation}
+    Il suffit ensuite de diviser par \(n\) des deux côtés pour obtenir le résultat attendu
+    \begin{equation}
+        |I(n,q)| = \frac{1}{n}\sum_{d|n}\mu\left(\frac{n}{d}\right)q^{d}.
+    \end{equation}
+\end{proof}
+\begin{remark} On récupère aussi un équivalent de \(|I(n,q)|\).
+    \begin{equation}
+        |I(n,q)| \sim \frac{q^n}{n}.
+    \end{equation}
+    Pour cela, il suffit de remarquer les inégalités suivantes
+    \begin{align}
+        \lvert\frac{1}{n}\sum_{d|n, d<n}\mu\left(\frac{n}{d}\right)q^{d}\rvert & \le \frac{1}{n}\sum_{d|n,d<n}\lvert\mu\left(\frac{n}{d}\right)q^{d}\rvert\\
+        & \le \frac{1}{n}\sum_{d|n,d<n}q^{d}\\
+        & \le \frac{1}{n}\sum_{d=1}q^{\lfloor \frac{n}{2} q^d\rfloor}\\
+        & = \frac{1}{n} \frac{q^{\lfloor \frac{n}{2} q^d\rfloor+1}-1}{q-1}
+    \end{align}
+    qui est un \(o(q^n)\). Ainsi, \(|I(n,q)| = \frac{q^n}{n}+o(q^n)\), d'où \(|I(n,q)| \sim \frac{q^n}{n}\).
+\end{remark}
 \end{document}
