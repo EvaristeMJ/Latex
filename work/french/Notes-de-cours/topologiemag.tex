@@ -1,0 +1,76 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mdframed}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+
+\newcommand*{\R}{\mathbb{R}}
+\newcommand*{\C}{\mathbb{C}}
+\newcommand*{\N}{\mathbb{N}}
+\newcommand*{\Z}{\mathbb{Z}}
+\newcommand*{\Q}{\mathbb{Q}}
+\newcommand*{\F}{\mathbb{F}}
+\newcommand*{\Pb}{\mathbb{P}}
+
+
+\newmdtheoremenv{theorem}{Théorème}
+\newmdtheoremenv{lemma}{Lemme}
+\newmdtheoremenv{corollary}{Corollaire}
+\newmdtheoremenv{definition}{Définition}
+\newmdtheoremenv{proposition}{Proposition}
+\newmdtheoremenv{remark}{Remarque}
+\newmdtheoremenv{example}{Exemple}
+\begin{document}
+\section{Espaces connexes}
+\begin{definition} Une partie d'un espace topologique \(X\) est dite connexe si et seulement si il n'existe pas de partition de \(A\) en deux ouverts non vides.
+\end{definition}
+De manière équivalente, un espace \(A\) est connexe si et seulement si les seuls ouverts fermés de \(A\) sont \(\emptyset\) et \(A\)  munis de la topologie associée à \(X\).
+\begin{lemma} Un espace topologie \(X\) est connexe si et seulement si toute application continue de \(X\) dans \(\{0,1\}\) muni de la topologie discrète est constante.
+\end{lemma}
+\begin{proof} Supposons que \(X\) est connexe et soit \(f:X\to\{0,1\}\) une application continue. Remarquons que \(\{0\}\) et \(\{1\}\) sont des ouverts fermés dans la topologie discrète de \(\{0,1\}\).
+    Puisque \(f\) est continue, on en déduit que \(A = f^{-1}(\{0\})\) et \(B = f^{-1}(\{1\})\) sont des ouverts fermés de \(X\). Comme \(X\) est connexe, on a \(A = \emptyset\) ou \(B = \emptyset\). De plus, \(A\cap B = \emptyset\) donc on a \(f = 0\) ou \(f = 1\), i.e. \(f\) est constante.\\
+
+    Supposons que toute application continue de \(X\) dans \(\{0,1\}\) est constante. Soit \(U\) une partie ouverte et fermée de \(X\). On pose \(f = \mathbb{1}_U\). Remarquons alors que \(f\) est continue.
+    En effet,
+    \begin{align}
+        f^{-1}(\{0\}) &= U^c,\\
+        f^{-1}(\{1\}) &= U\\
+        f^{-1}(\emptyset) &= \emptyset,\\
+        f^{-1}(\{0,1\}) &= X.
+    \end{align}
+    Par définition, chacun de ces ensembles sont ouverts donc \(f\) est continue et, par hypothèse, constante.
+    Ou bien, \(f = 0\) et donc \(U = \emptyset\), ou bien \(f = 1\) et donc \(U = X\). On en déduit que les seuls ouverts fermés de \(X\) sont \(\emptyset\) et \(X\), i.e. \(X\) est connexe.
+\end{proof}
+\begin{example} Si \(X\) est un espace discret, alors toute partie connexe de \(X\) est réduite à un singleton.
+\end{example}
+\begin{proposition} L'image d'un espace topologique connexe par une application continue est un espace connexe.
+\end{proposition}
+\begin{proof}
+Soit \(f: X\to Y\) une application continue avec \(X\) convexe. On pose \(A = f(X)\). Soit \(U\) une partie ouverte et fermée de \(A\). 
+On sait que \(V = f^{-1}(U)\) est une partie fermée et ouverte de \(X\) par continuité.
+Puisque \(X\) est connexe, on a que \(V = \emptyset\) ou \(V = X\). De plus, \(f(V) =f(f^{-1}(U)) = U\).
+Finalement, soit \(U = f(X) = A\) ou bien \(U = f(\emptyset) = \emptyset\), on en déduit que \(A\) est connexe. 
+\end{proof}
+\begin{corollary} Tout espace topologique homéomorphe à un espace connexe est connexe.
+\end{corollary}
+\begin{proposition} Soit \(A\) une partie connexe d'un espace topologique \(X\), alors l'adhérence de \(A\) est connexe.
+\end{proposition}
+On peut utiliser les composantes connexes par arcs pour simplifier certaines preuves.
+En effet, on définit la relation d'équivalence suivante sur un espace topologique \(X\) :
+\begin{equation}
+    x\sim y \iff x\in C(y)
+\end{equation}
+où \(C(y)\) est une composante connexe de \(X\) contenant \(y\). En particulier, 
+on a que \(X\) est connexe si et seulement si il n'existe qu'une seule classe d'équivalence de \(\sim\).
+Plus généralement, les composantes connexes forment une partition de \(X\).
+\begin{proposition}
+    Soit \(X,Y\) deux espaces topologiques connexes, alors \(X\times Y\) est aussi connexe munit de la topologie produit.
+\end{proposition}
+\begin{proof} Soient \(x,x'\in X\) et \(y,y'\in Y\). Remarquons que \(X\times \{y\}\) est homéomorphe à \(X\), donc connexe.
+    De plus, il s'agit d'une partie de \(X\times Y\) contenant \((x,y)\) et \((x',y)\) donc
+    \(C(x,y) = C(x',y)\). On fait la même chose avec \(\{x'\}\times Y\) qui est homéomorphe à \(Y\) donc connexe.
+    On en déduit qu'il s'agit d'une composante connexe de \(X\times Y\) contenant \((x',y)\) et \((x',y')\), 
+    d'où \(C(x,y) = C(x',y) = C(x',y')\). Il n'y a qu'une unique classe d'équivalence donc \(X\times Y\) est connexe.
+\end{proof}
+\end{document}
