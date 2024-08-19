@@ -1,0 +1,101 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Composantes connexes de \(\mathcal{GL}_n(\R)\)}
+\begin{definition}
+    Une partie d'un espace topologique \(X\) est dite connexe par arcs si pour tout \(x,y\) dans \(X\), il existe
+    une application continue \(\gamma:[0,1]\to X\) telle que \(\gamma(0)=x\) et \(\gamma(1)=y\).
+    \begin{remark} On appelera \(\gamma\) un chemin de \(x\) à \(y\) dans \(X\). Sur le dessin, cela revient 
+        à montrer que l'on peut \textit{tracer} un chemin continu n'importe quel couple de points.
+    \end{remark}
+\end{definition}
+On pourra également considérer la relation d'équivalence \(\longleftrightarrow\) sur \(X\) définie par
+\begin{equation}
+    x\longleftrightarrow y \iff \exists \gamma:[0,1]\to X \text{ telle que } \gamma(0) = x \text{ et } \gamma(1) = y.
+\end{equation}
+Pour un \(x\in X\) donné, on pourra appelé \(\mathcal{C}(x)\) la composante connexe par arcs de \(x\).
+Dire que \(X\) est connexe par arcs est équivalent à dire que pour un \(x\in X\), \(\mathcal{C}(x) = X\).\\
+
+\begin{lemma} Si \(f\) est une application continue de \(X\) dans \(Y\), deux espaces topologiques, et que
+    \(X\) est connexe par arcs, alors \(f(X)\) est connexe par arcs dans \(Y\).
+\end{lemma}
+\begin{proof}
+    Soient \(f(x_1),f(x_2)\in f(X)\). \(X\) est connexe par arcs donc il existe \(\gamma\) un chemin de \(x_1\) vers \(x_2\).
+    \(f\circ\gamma\) est alors un chemin de \(f(x_1)\) vers \(f(x_2)\).
+\end{proof}
+\begin{proposition} \(\mathcal{GL}_n(\R)\) n'est pas connexe par arcs.
+\end{proposition}
+\begin{proof} On remarquera que \(\det\) est une application linéaire surjective et continue de \(\mathcal{GL}_n(\R)\) dans \(\R^*\).
+    Or, \(\R^*\) n'est pas connexe par arcs. Par contraposée du lemme précédent, \(\mathcal{GL}_n(\R)\) n'est pas connexe par arcs.
+\end{proof}
+Nous allons en fait montrer que \(\mathcal{GL}_n(\R)\) admet deux composantes connexes par arcs.
+\begin{lemma} \(\mathcal{O}_n(\R)\) admet deux composantes connexes par arcs, \(\mathcal{O}_n^+\) et \(\mathcal{O}_n^-\).
+\end{lemma}
+Evidemment, \(\mathcal{O}_n\(\R\)\)  n'est pas connexe par arcs. Simplement car un espace discret ne peut être connexe par arcs que s'il est réduit à un singleton, ce qui n'est pas le cas de \(\det(\mathcal{O}_n(\R))\).
+\begin{proof} On note \(R(\theta)\) une matrice de rotation \(\theta\).
+    Soit \(A\in \mathcal{O}_n^+(\R)\). On sait qu'il existe une matrice orthogonale \(P\)
+    telle que \(A = PDP^{-1}\) où \(D = \mathrm{Diag}(I_r,R(\pi),\ldots,R(\pi),R(\theta_1),\ldots,R(\theta_p))\).
+    On considère \(\delta\) un chemin de \(\pi à 0\). On pose \(\Delta(t) = \mathrm{Diag}(I_r,R(\delta(t)),\ldots,R(\delta(t)))\).
+    Ensuite, on considère \(\gamma_{i}\) un chemin de \(\theta_i\) à \(0\) dans \(]-\pi,\pi[\).
+
+    On finit par poser \(\Gamma(t) = P\mathrm{Diag}(\Delta(t),R(\gamma_1(t)),\ldots,R(\gamma_p(t)))P^{-1}\).
+    On a \(\Gamma(0) = A\) et \(\Gamma(1)=I_n\). \(\theta\mapsto R(\theta)\) est continue, on en déduit que \(t\mapsto \Delta(t)\) et \(t\mapsto \Gamma(t)\) sont continues aussi.
+    On conserve la forme de "diagonale de rotation" ce qui permet d'assurer que \(\Gamma\) est à valeurs dans \(\mathcal{O}_n(\R)\).
+    \begin{equation}
+        \det(\Gamma(t)) = \underbrace{\det(\Delta(t))}_{=1\text{ ou } =(-1)^{2m}=1}\prod_{i=1}^p \underbrace{\det(R(\gamma_i(t)))}_{=1} = 1.
+    \end{equation}
+    On a donc trouvé un chemin de \(A\) à \(I_n\), ce qui suffit à montrer que \(\mathcal{O}_n^+(\R)\) est connexe par arcs.\\
+
+    La même démonstration se fait en créant un chemin vers \(\mathrm{-1,I_{n-1}}\).\\
+
+    Finalement, il ne suffit que de montrer que \(\mathcal{O}_n^+(\R)\) et \(\mathcal{O}_n^-(\R)\) forment une partition de \(\mathcal{O}_n(\R)\), ce qui est trivial.
+    On a donc montré que \(\mathcal{O}_n(\R)\) admet deux composantes connexes par arcs, \(\mathcal{O}_n^+(\R)\) et \(\mathcal{O}_n^-(\R)\).
+\end{proof}
+\begin{lemma} On note \(\mathcal{S}^{++}_n(\R)\) l'ensemble des matrices symétriques définies
+    postives. Alors \(\mathcal{S}^{++}_n(\R)\) est connexe par arcs.
+\end{lemma}
+\begin{proof} La preuve est plus simple. On considère \(A\in \mathcal{S}_n^{++}(\R)\).
+    D'après le théorème spectral, il existe une matrice orthogonale \(P\) telle que
+    \(A = PDP^{-1}\) avec \(D = \mathrm{Diag}(\lambda_1,\ldots,\lambda_n)\) et \(\lambda_i > 0\).
+    (Réciproquement, une matrice d'une telle forme est symétrique définie positive).\\
+    \(\R^*_+\) est connexe par arcs donc il existe un chemin \(\gamma_i\) de \(\lambda_i\) ) \(1\) dans \(\R^*_+\).
+    On pose ensuite \(\Gamma(t) = P\mathrm{Diag}(\gamma_1(t),\ldots,\gamma_n(t))P^{-1}\).
+    \(\Gamma\) est continue, à valeurs dans \(\mathcal{S}_n^{++}(\R)\) et \(\Gamma(0) = A\), \(\Gamma(1) = I_n\).
+    On a donc trouvé un chemin de \(A\) à \(I_n\). \(\mathcal{S}_n^{++}(\R)\) est donc connexe par arcs.
+\end{proof}
+\begin{lemma}[Décomposition(s) polaire(s)]
+    Soit \(A\in \mathcal{GL}_n(\R)\). Alors il existe \(O\in \mathcal{O}_n(\R)\) et \(S\in \mathcal{S}_n^{++}(\R)\) telles que
+    \begin{equation}
+        A = SO.
+    \end{equation}
+    De plus, si \(\det(A)>0\), alors \(O\in \mathcal{text{O}}_n^+(\R)\) et si \(\det(A)<0\), alors \(O\in \mathcal{O}_n^-(\R)\).
+\end{lemma}
+\begin{proof} \(A\) est inversible donc \(A^TA\) est symétrique définie positive.
+    \begin{equation}
+        A = AA^T{A^T}^{-1}.
+    \end{equation}
+    \(AA^T\) est symétrique définie positive donc il existe \(S\) symétrique définie positive telle que \(AA^T = S^2\).
+    D'où \(A = SS{(A^T)}^{-1}\). En posant \(O = S{(A^T)}^{-1}\), on a bien \(A = SO\).\\
+    Il reste à montrer que \(O\) est orthogonale. On a 
+    \begin{equation}
+        O^TO = {(S{(A^T)}^{-1})}^TS{(A^T)}^{-1} = A^{-1}SS{(A^T)}^{-1} = I_n.
+    \end{equation}
+    \begin{equation}
+        OO^T = S{(A^T)}^{-1} {(S{(A^T)}^{-1})}^T = S{(A^T)}^{-1}A^{-1}S = I_n.
+    \end{equation}\\
+
+    Pour la remarque supplémentaire du lemme, on a \(\det(A) = \det(S)\det(O)\). Or, \(\det(S)>0\) et \(\det(O) = \det(A)\).
+\end{proof}
+\begin{theorem}
+    \(\mathcal{GL}_n(\R)\) admet deux composantes connexes par arcs, \(\mathcal{O}_n^+(\R)\mathcal{S}_n^{++}(\R)\) et \(\mathcal{O}_n^-(\R)\mathcal{S}_n^{++}(\R)\).
+\end{theorem}
+\begin{proof} Le théorème est une utilisation de tous ces lemmes. Soit \(A\in \mathcal{GL}_n(\R)^+\), on considère
+    sa décomposition polaire \(S,O\), donc \(O\in \mathcal{O}_n^+(\R)\) et \(S\in \mathcal{S}_n^{++}(\R)\). On note
+    \(\Theta\) un chemin de \(O\) à \(I_n\) dans \(\mathcal{O}_n^+(\R)\) et \(\Sigma\) un chemin de \(S\) à \(I_n\) dans \(\mathcal{S}_n^{++}(\R)\). 
+    On pose \(\Gamma(t) = \Theta(t)\Sigma(t)\). \(\Gamma\) est continue, à valeurs dans \(\mathcal{GL}_n(\R)^+\) et \(\Gamma(0) = A\), \(\Gamma(1) = I_n\).
+    On a donc trouvé un chemin de \(A\) à \(I_n\). On a donc montré que \(\mathcal{GL}_n(\R)^+\) est connexe par arcs.\\
+
+    On fait la même preuve pour \(\mathcal{GL}_n(\R)^-\) en créant un chemin vers \(\mathrm{Diag}(-1,I_{n-1})\).\\
+
+    Puisque \(\mathcal{GL}_n(\R)^+\) et \(\mathcal{GL}_n(\R)^-\) forment une partition de \(\mathcal{GL}_n(\R)\), on a montré que \(\mathcal{GL}_n(\R)\) admet deux composantes connexes par arcs.
+\end{proof}
+\end{document}
