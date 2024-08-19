@@ -1,0 +1,53 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Connexité par arcs de \(\mathcal{SL}_n(\C), \mathcal{GL}_n(\C)\) et \(\mathcal{U}_n(\C)\)}
+\begin{definition}
+Une partie d'un espace topologique \(X\) est dite connexe par arcs si pour tout \(x,y\) dans \(X\), il existe
+une application continue \(\gamma:[0,1]\to X\) telle que \(\gamma(0)=x\) et \(\gamma(1)=y\).
+\begin{remark} On appelera \(\gamma\) un chemin de \(x\) à \(y\) dans \(X\). Sur le dessin, cela revient 
+    à montrer que l'on peut \textit{tracer} un chemin continu n'importe quel couple de points.
+\end{remark}
+\end{definition}
+On pourra également considérer la relation d'équivalence \(\longleftrightarrow\) sur \(X\) définir par
+\begin{equation}
+    x\longleftrightarrow y \iff \exists \gamma:[0,1]\to X \text{ telle que } \gamma(0) = x \text{ et } \gamma(1) = y.
+\end{equation}
+Dire que \(X\) est connexe par arcs revient à dire que \(\longleftrightarrow\) n'admet qu'une seule classe d'équivalence.
+Autrement, on pourra dire que \(X/\longleftrightarrow\) sera le \textit{nombre} de composantes connexes par arcs de \(X\).\\
+
+A savoir que la connexité par arcs une propriété un peu plus forte que la connexité. Il existe des espaces connexes non connexes par arcs mais tout espace connexe par arcs est connexe.\\
+
+Une dernière remarque importante est qu'on se soucie assez peu que \(\gamma\) soit à valeurs dans \([0,1]\). En effet, tant que \(\gamma\) est à valeurs sur un segment, on pourra revenir au segment \([0,1]\).\\
+
+\begin{lemma} \(\C^*\) est connexe par arcs.
+\end{lemma}
+\begin{proof}
+    Soient \(z,w\in \C^*\). Presque tout le temps, on pourra trouver un chemin facilement en prenant \(\gamma(t) = (1-t)z + tw\). En fait, \(\gamma\) traversera \(0\)
+    à la condition que \(z\) et \(w\) soient d'arguments opposés. Supposons que \(z\) et \(w\) soient de la forme \(re^{i\theta}\) et \(r'e^{i(\theta+\pi)}\).
+    On définit \(\gamma\) sur \([0,1/2]\) par \(\gamma(t) = (1-t)z + tre^{i(\theta+\pi/2)}\) et sur \([1/2,1]\) par \(\gamma(t) = (1-t)re^{i(\theta+\pi/2)} + tw\). 
+\end{proof}
+\begin{proposition} \(\mathcal{GL}_n(\C)\) est connexe par arcs.
+\end{proposition}
+\begin{proof}
+    Soit \(A\in\mathcal{GL}_n(\C)\). On sait que \(A\) est trigonalisable car \(\chi_A\) est scindé sur \(\C\).
+    On peut alors écrire \(A = PT(a_1,\ldots,a_n)P^{-1}\) avec \(T(a_1,\ldots,a_n)\) une matrice triangulaire de diagonale \(a_1,\ldots,a_n\).
+    On note \(\gamma_{ii}\) le chemin de \(a_i\) vers \(1\). Pour tous les autres coefficients, on note \(\gamma_{ij}\) le chemin de \(T_{i,j}\) à \(0\). Et finalement, on pose \(\Gamma(t) = (\gamma_{i,j}(t))_{i,j}\).
+    Remarquons que \(\Gamma(0)= A\) et que \(\Gamma(1)=I_n\). De plus, chacune des fonctions composites \(\gamma_{i,j}\) est continue donc \(\Gamma\) est continue, à valeurs dans 
+    \(\mathcal{GL}_n(\C)\) car les éléments de la diagonale restent non nuls (via le lemme précédent). On a donc trouvé un chemin de \(A\) vers \(I_n\).\\
+
+    Considérons une autre matrice quelconque \(B\in\mathcal{GL}_n(\C)\). On a 
+    \begin{equation}
+        A \longleftrightarrow I_n \longleftrightarrow B.
+    \end{equation}
+    On en déduit que \(\mathcal{GL}_n(\C)\) est connexe par arcs.
+\end{proof}
+\begin{lemma} Soit \(A \in \mathcal{U}_n(\C)\), alors \(A\) est diagonalisable.
+\end{lemma}
+\begin{proof} On le déduit du fait qu'une matrice unitaire est aussi normale, en effet \(U^\dagger U = UU^\dagger = I_n\).
+    En utilisant ensuite le théorème spectral, on déduit que \(A\) est diagonalisable.
+\end{proof}
+\begin{proposition} \(\mathcal{U}_n(\C)\) est connexe par arcs.
+\end{proposition}
+\begin{proof}
+\end{proof}
+\end{document}
