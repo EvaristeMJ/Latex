@@ -41,13 +41,29 @@ Une dernière remarque importante est qu'on se soucie assez peu que \(\gamma\) s
     \end{equation}
     On en déduit que \(\mathcal{GL}_n(\C)\) est connexe par arcs.
 \end{proof}
-\begin{lemma} Soit \(A \in \mathcal{U}_n(\C)\), alors \(A\) est diagonalisable.
+\begin{lemma} Soit \(U \in \mathcal{U}_n(\C)\), alors \(A\) est semblable à \(\mathrm{Diag}(e^{i\theta_1},\ldots,e^{i\theta_n})\).
 \end{lemma}
-\begin{proof} On le déduit du fait qu'une matrice unitaire est aussi normale, en effet \(U^\dagger U = UU^\dagger = I_n\).
-    En utilisant ensuite le théorème spectral, on déduit que \(A\) est diagonalisable.
+\begin{proof} Premièrement, on sait qu'une valeur propre \(\lambda\) de \(U\) vérifie \(\lvert \lambda \rvert = 1\).
+    On considère \(u\) l'endomorphisme canoniquement associé à \(U\). On procède par récurrence sur \(n\).
+
+    Le cas \(n=1\) est trivial. On considère un espace de dimension \(n+1\). u admet une valeur propre \(\lambda\) et on considère \(x\) un vecteur propre unitaire associé.
+    \(D = \mathrm{Vect}(e_1)\) est une droite stable par \(u\) donc \(D^\perp\) est aussi stable par \(u\).
+
+    On considère ensuite \(v = u_{\lvert D^\perp}\) l'endomorphisme induit par stabilité. Par l'unitarité de \(u\), \(v\) est aussi unitaire sur un espace de dimension \(n\).
+    Par hypothèse de récurrence, il existe une base orthonormée \((e_2,\ldots,e_{n+1})\) de diagonalisation de \(v\). On ajoute ensuite \(e_1\) à cette base, ce qui en fait une base de diagonalisation de \(u\).\\
+
+    Retour à la matrice \(U\), il existe donc une matrice unitaire \(P\) telle que \(P^{-1}UP = \mathrm{Diag}(e^{i\theta_1},\ldots,e^{i\theta_n})\), car les valeurs propres de \(U\) sont de module 1.
 \end{proof}
 \begin{proposition} \(\mathcal{U}_n(\C)\) est connexe par arcs.
 \end{proposition}
-\begin{proof}
+\begin{proof} Soit \(U\in \mathcal{U}_n(\C)\). On sait qu'il existe \(P\) unitaire tel que \(U = PD(e^{i\theta_1},\ldots,e^{i\theta_n})P^{-1}\).
+    On considère \(\gamma_{i}\) le chemin de \(\theta_i\) à \(0\) dans \(\R\) et on pose \(\Gamma(t) = P(D(e^{i\gamma_1(t)},\ldots,e^{i\gamma_n(t)}))P^{-1}\). Remarquons que
+    \(A \mapsto PAP^{-1}\), ainsi que \(t\mapsto D(e^{i\gamma_1(t)},\ldots,e^{i\gamma_n(t)})\). On en déduit que \(\Gamma\) est continue par composition. On a \(\Gamma(0) = U\) et \(\Gamma(1) = I_n\).
+    De plus, \(\Gamma(t)\) est unitaire pour tout \(t\in [0,1]\). On a donc trouvé un chemin de \(U\) à \(I_n\).\\
+
+    Considérons une autre matrice \(V\in\mathcal{text{U}}_n(\C)\). On a 
+    \begin{equation}
+        U \longleftrightarrow I_n \longleftrightarrow V.
+    \end{equation}
 \end{proof}
 \end{document}
