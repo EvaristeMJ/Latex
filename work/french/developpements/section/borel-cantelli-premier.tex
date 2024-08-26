@@ -1,0 +1,148 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Lemmes de Borel-Cantelli et applications à l'étude des nombres premiers}
+\subsection*{Premier lemme}
+\begin{lemma} Soit \((A_n)\) une suite d'évènements tels que \(\sum_{n\in\N} \Pr(A_n)<\infty\),
+    alors \(\Pb(A) = 0\) en notant \(A = \lim\displaystyle\sup_{n} A_n\).
+\end{lemma}
+\begin{proof} \(A\) est aussi égal à \(\bigcap_{n\in\N}\bigcup_{k\geq n} A_k\).
+    On a alors \(\Pb(A) = \lim_{n\to\infty} \Pb\left(\bigcup_{k\geq n} A_k\right)\).
+    Or, \(\Pb\left(\bigcup_{k\geq n} A_k\right)\leq \sum_{k\geq n} \Pb(A_k)\).
+    En passant à la limite, on obtient \(\Pb(A) = 0\).
+\end{proof}
+Une application du premier lemme est :
+\begin{proposition} Soit \(X_n\) une suite de variables aléatoires et \(X\) une variable aléatoire discrète.
+    On pose \(A_n(\epsilon) = \{\lvert X_n - X\rvert > \epsilon\}\). Si pour tout \(\epsilon>0\), \(\sum_{n\in\N} \Pr(A_n(\epsilon))<\infty\), alors
+    \(X_n\) converge presque sûrement vers \(X\).
+\end{proposition}
+\begin{proof} Pour tout \(\epsilon\), on note \(A(\epsilon) = \lim\sup_n A_n(\epsilon)\). D'après les hypothèses et
+    le premier lemme de Borel-Cantelli, on a \(\Pb(A(\epsilon)) = 0\) pour tout \(\epsilon\).
+    On a alors
+    \begin{equation}
+        \Pb\left(\bigcup_{n\in \N}A\left(2^{-n}\right)\right) \le \sum_{n\in\N} \Pb(A\left(2^{-n}\right)) = 0.
+    \end{equation}
+    Par complémentaire, on a \(\Pb(\bigcap_{n\in \N}\overline{A\left(2^{-n}\right)}) = 1\). Soit 
+    \begin{equation}
+        \Pb(\bigcap_{n\in \N}\bigcup_{j\in \N}\bigcap_{k\ge j}\{\lvert X_j - X\rvert \le 2^{-k}\}) = 1.
+    \end{equation}
+    Ce qui permet de conclure que \(X_n\) converge presque sûrement vers \(X\).
+
+\end{proof}
+
+\subsection*{Deuxième lemme}
+\begin{lemma} Soit \((A_n)\) une suite d'évènements indépendants. Si \(\sum_{n\in\N}\Pb(A_n) = \infty\),
+    alors \(\Pb(A) = 1\) en notant \(A = \lim\sup_n A_n\).
+\end{lemma}
+\begin{proof} Pour commencer, on va considérer le complémentaire de \(A\), que l'on va noter \(B\), donc
+    \begin{equation}
+        B = \bigcup_{n\in\N}\bigcap_{k\geq n} \overline{A_k}.
+    \end{equation}
+    Remarquons que \(\left(\bigcap_{k\geq n} \overline{A_k}\right)\) est une suite croissante d'évènements.
+    On a alors
+    \begin{equation}
+        \Pb\left(\bigcup_{n\in\N}\bigcap_{k\geq n} \overline{A_k}\right) = \lim_{n\to\infty}\Pb\left(\bigcap_{k\geq n} \overline{A_k}\right).
+    \end{equation}
+    Or, \(\Pb\left(\bigcap_{k\geq n} \overline{A_k}\right) = \prod_{k\geq n} \Pb(\overline{A_k}) = \prod_{k\geq n} (1-\Pb(A_k))\).
+    On peut alors appliquer l'inégalité de convexité suivante : \(1-x\le e^{-x}\).
+    \begin{equation}
+        \prod_{k\geq n} \Pb(\overline{A_k}) \le \prod_{k\geq n} e^{-\Pb(A_k)} = e^{-\sum_{k\geq n}\Pb(A_k)}.
+    \end{equation}
+    On peut aussi remarquer que \(\lim_n-\sum_{k\geq n}\Pb(A_k) = -\infty\) puisqu'il s'agit du
+    reste d'une suite divergente. Ainsi,
+    \begin{equation}
+        \lim_n\prod_{k\geq n} \Pb(\overline{A_k}) = 0.
+    \end{equation}
+    Et donc, \(\Pb(B) = 0\), ce qui permet de conclure que \(\Pb(A) = 1\).
+\end{proof}
+On peut appliquer ce lemme pour démontrer la fameuse expérience de pensée 
+des singes de Shakespeare.
+\begin{proposition} Un singe tape au hasard sur un clavier (de 26 lettres) pour un temps infini.
+    Alors on trouvera, presque sûrement, Hamlet dans le texte tapé.
+\end{proposition}
+\begin{proof}
+    On suppose que la longueur de Hamlet est \(l\). On note \(A_n\) l'évènement "Hamlet" est tapé entre les \(n\) et \(n+l-1\) lettres. 
+    Les \(A_n\) sont indépendants et \(\Pb(A_n) = 26^{-l}\). Et donc, \(\sum_{n\in\N}\Pb(A_n) = \infty\).
+    En utilisant le deuxième lemme, on a que \(\Pb(A) = 1\) où \(A = \lim\sup_n A_n\). C'est-à-dire que 
+    \begin{equation}
+        \Pb\left(\bigcap_{n}\bigcup_{k\ge n}A_k\right) = 1.
+    \end{equation}
+    Ce qui signifie que Hamlet sera presque sûrement tapé.
+\end{proof}
+\begin{proposition} Il n'existe pas de probabilité \(\Pb\) sur \((\N^*,\mathcal{P}(\N^*))\) telle que \(\Pb(n\N^*) = \frac{1}{n}\).
+\end{proposition}
+\begin{proof}
+    Notons \(A_n = n\N^*\)
+    Supposons qu'une telle probabilité existe. Remarquons que si \(p\) et \(q\) deux premiers distincts, alors 
+    \(A_p\cap A_q = A_{pq}\). En effet, on a généralement que \(A_p\cap A_q \subset A_{pq}\) mais puisque
+    \(p\) et \(q\) sont premiers, on a que \(A_{pq} \subset A_p\cap A_q\) (plus généralement, cela est vrai pour deux nombres premiers entre eux).
+    Par définition,
+    \begin{equation}
+        \Pb(A_p\cap A_q) = \Pb(A_{pq}) = \frac{1}{pq} = \Pb(A_p)\Pb(A_q).
+    \end{equation}
+    On remarquera que pour un nombre arbitraire de premiers distincts, les \(A_p\) seront indépendants.
+    Notons \(p_1,...,p_n,...\) les nombres premiers rangés dans l'ordre croissant.
+
+    On sait que \(\sum_{k=1}^\infty \frac{1}{p_k} = \infty\) donc d'après le deuxième lemme, on a que 
+    \begin{equation}
+        \Pb\left(\lim\sup_n A_{p_n}\right) = 1.
+    \end{equation}
+    Remarquons qu'il n'existe qu'un seul entier multiples d'une infinité de nombre premiers, il s'agit de \(0\) (ici exclu).
+    De plus, \(\lim\sup_n A_{p_n} \subset \{\text{entier multiple d'une infinité de premiers} = \emptyset\}\). On obtient une contradiction
+    \begin{equation}
+        \Pb\left(\lim\sup_n A_{p_n}\right)=\Pb(\emptyset) = 1.
+    \end{equation}
+    Il n'existe donc pas de probabilité \(\Pb\) sur \((\N^*,\mathcal{P}(\N^*))\) telle que \(\Pb(n\N^*) = \frac{1}{n}\).
+\end{proof}
+On rappelle une preuve de la divergence de la série des inverses de nombres premiers,
+autant le faire avec des probabilités.
+\begin{proposition}
+    La série \(\sum_{n\in\N}\frac{1}{p_n}\) diverge.
+\end{proposition}
+\begin{proof}
+    On définit la probabilité suivante pour \(s>1\) :
+    \begin{equation}
+        \Pb(\{n\}) = \frac{1}{\zeta(s)}\frac{1}{n^s}
+    \end{equation}
+    où \(\zeta\) est la fonction zêta de Riemann. On peut alors montrer que \(\Pb\) est bien une probabilité.
+    On reprend la notation \(A_p\) pour \(p\N^*\). Remarquons déjà que pour un ensemble \(B\), on a 
+    \begin{equation}
+        \Pb(B) = \sum_{n\in B}\Pb(\{n\}) = \frac{1}{\zeta(s)}\sum_{n\in B}\frac{1}{n^s}.
+    \end{equation}
+    En particulier, pour \(A_p\) avec \(p\) premier, on a
+    \begin{equation}
+        \Pb(A_p) = \frac{1}{\zeta(s)}\sum_{n\in p\N^*}\frac{1}{n^s} = \frac{1}{\zeta(s)}\sum_{n\in\N^*}\frac{1}{(pn)^s} = \frac{1}{p^s}.
+    \end{equation}
+    On considère \(q_1,...,q_k\) un ensemble de nombres de premiers distincts
+    \begin{align}
+        \Pb\left(\bigcap_{i=1}^k A_{q_i}\right) & = \sum_{n\in\bigcap_{i=1}^kA_{q_i}}\Pb(\{n\})\\
+        &= \frac{1}{\zeta(s)}\sum_{n\in \N^*} \frac{1}{(q_1\ldots q_kn)^s}\\
+        &= \prod_{i=1}^k \frac{1}{q_i^s}
+        &= \prod \Pb(A_{q_i}).
+    \end{align}
+    On en déduit que les \((A_{p_i})\) sont indépendants. Notons \(B\) l'ensemble des entiers qui ne sont multiples d'aucun nombre premier.
+    \begin{equation}
+        \Pb(B) = \Pb(\{1\}) + \Pb(B\setminus \{1\}) = \frac{1}{\zeta(s)}
+    \end{equation}
+    car \(\Pb(B\setminus \{1\}) = \Pb(\emptyset)\). Mais par définition :
+    \begin{equation}
+        \Pb(B) = \Pb\left(\bigcap_{k\ge 1} \overline{A_{p_k}}\right)
+    \end{equation}
+    d'où
+    \begin{equation}
+        \Pb(B) = \prod_{k\ge 1} 1-\frac{1}{p_k^s} = \frac{1}{\zeta(s)}.
+    \end{equation}
+    Appliquons un logarithme :
+    \begin{equation}
+        -\log(\zeta(s)) = \sum_{k\ge 1} \log\left(1-\frac{1}{p_k^s}\right).
+    \end{equation}
+    Or, \(\log(1-x)\le -x\) pour \(x\in[0,1]\) donc 
+    \begin{equation}
+        -\log(\zeta(s)) \ge -\sum_{k\ge 1} \frac{1}{p_k^s}.
+    \end{equation}
+On en déduit 
+\begin{equation}
+    \log(\zeta(s)) \le \sum_{k\ge 1} \frac{1}{p_k^s} \le \sum_{k\ge 1} \frac{1}{p_k}.
+\end{equation}
+Or, \(\zeta(s)\) tend vers l'infini quand \(s\) tend vers \(1\), donc la série \(\sum_{k\ge 1} \frac{1}{p_k}\) diverge.
+\end{proof}
+\end{document}
