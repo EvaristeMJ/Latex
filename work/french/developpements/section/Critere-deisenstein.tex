@@ -1,0 +1,101 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Critère d'Eisenstein}
+\begin{abstract}
+    Le critère d'Eisenstein est un critère d'irréductibilité d'un polynôme. Dans sa forme
+     la plus connue, il s'énonce ainsi : soit \(P = \sum_{i=0}^d a_i X^i\) un polynôme à coefficients dans \(\Z\).
+     S'il existe un nombre premier \(p\) tel que \(p\) divise tous les coefficients sauf le dernier et que 
+     \(p^2\) ne divise pas le premier coefficient, alors \(P\) est irréductible dans \(\Q[X]\).
+
+     Nous en donnerons une généralisation dans le cas des polynômes à coefficients dans un anneau intègre.
+\end{abstract}
+\begin{definition} Soit \(\mathcal{A}\) un anneau commutatif. Un idéal \(I\) est dit premier
+    si pour tous \(a,b\in \mathcal{A}\), si \(ab\in I\), alors \(a\in I\) ou \(b\in I\).
+    \begin{remark} De manière équivalente, un idéal \(I\) est dit premier si \(\mathcal{A}/I\) définit par
+        passage au quotient un anneau intègre.
+    \end{remark}
+\end{definition}
+\begin{theorem}[Critère d'Eisenstein] Soit \(\mathcal{A}\) un anneau intègre. Soit \(P = \sum_{i=0}^d a_ix^i\in \mathcal{A}[x]\).
+    S'il existe un idéal premier \(I\) de \(\mathcal{A}\) tel que 
+    \begin{itemize}
+        \item \(\forall i\in \{0,...,d-1\}, a_i\in I\),
+        \item \(a_d\notin I\),
+        \item \(a_0\notin I^2\) (c'est-à-dire \(a_0\) n'est pas le carré d'un élément de \(I\)),
+    \end{itemize}
+    Alors \(P\) est irréductible dans \(\mathcal{A}[x]\).
+\end{theorem}
+\begin{proof} Supposons que \(P = RQ\) avec \(\deg(R) = m\) et \(\deg(Q) = d-m\) avec \(\deg(R) \ge 1\).
+    Par réduction modulo \(I\) (i.e. considérer \(\mathcal{A}/I[x]\)), on a 
+    \begin{equation}
+        P = RQ = a_d x^d\; \mathrm{mod}\;I.
+    \end{equation}
+    Or \(\mathcal{A}/I\) est intègre donc \(\mathcal{A}/I[x]\) est intègre. On en déduit que les réductions de \(R\) et \(Q\)
+    sont de la forme \(R = bx^{m} \; \mathrm{mod}\;I\) et \(Q = cx^{d-m}\; \mathrm{mod}\;I\). En particulier, on en déduit que
+    \(r_0\) et \(g_0\) sont dans \(I\). Puisque \(a_0 = r_0g_0\), on en déduit que \(a_0\in I^2\). Cela contredit l'hypothèse du théorème,
+    on en déduit que \(P\) est irréductible.
+\end{proof}
+Le théorème d'Eisenstein pour les polynômes à coefficients dans \(\Z\) est un peu plus fort que le théorème général puisqu'on obtient une irréductibilité dans \(\Q[X]\) et non dans \(\Z[X]\).
+C'est l'objet de la proposition suivante, qui montre que les deux théorèmes sont équivalents.
+\begin{proposition} Un polynôme \(P\in \Z[X]\) est irréductible dans \(Q[X]\) si et seulement si il est
+    irréductible dans \(\Z[X]\).
+\end{proposition}
+\begin{proof} Bien sûr, si \(P\) est irréductible dans \(\Q[X]\), il est aussi dans \(\Z[X]\). Supposons désormais
+    qu'il le soit dans \(\Z[X]\). Supposons qu'il existe \(R,Q\in \Q[X]\) tels que \(P = RQ\).
+
+    Il existe \(q,r\in\Z\) tel que \(qQ\in \Z[X]\) et \(rR\in \Z[X]\). On peut ensuite écrire
+    \begin{equation}
+        qrP = qR rQ = c(qR)R'c(rQ)Q'
+    \end{equation}
+    où \(R',Q'\) sont des polynômes à coefficients entiers et \(c(R),c(Q)\) sont les pgcd des coefficients de \(R\) et \(Q\).
+    On en déduit que 
+    \begin{equation}
+        qrc(P) = c(qR)c(rQ)
+    \end{equation}
+    d'où \(qrP = qrc(P)R'Q'\) et finalement que \(P = c(P)R'Q'\). En conclusion, \(P\) est irréductible dans \(\Z[X]\) puisque \(R',Q'\) sont de degrés supérieurs à \(1\),
+    et \(c(P)\) n'est qu'une constante entière.
+\end{proof}
+\begin{corollary}[Critère d'Eisenstein] Soit \(P = \sum_{i=0}^d a_i X^i\) un polynôme à coefficients dans \(\Z\).
+    S'il existe un nombre premier \(p\) tel que \(p\) divise tous les coefficients sauf le dernier et que 
+    \(p^2\) ne divise pas le premier coefficient, alors \(P\) est irréductible dans \(\Q[X]\).
+\end{corollary}
+\begin{proof} On applique le théorème d'Eisenstein avec \(\mathcal{A} = \Z\) et \(I = (p)\).
+    Ainsi, \(P\) est irréductible dans \(\Z[X]\) donc dans \(\Q[X]\) par la proposition précédente.
+\end{proof}
+Le critère d'Eisenstein est un critère d'irréductibilité puissant, en particulier lorsque l'on 
+considère les fermés de Zariski. L'idée est de considérer \(\mathcal{A}[x,y]\) comme \(\mathcal{A}[x][y]\) et d'appliquer le critère
+d'Eisenstein sur \(\mathcal{A}[x]\).
+\begin{example} Soit \(f = y^2 + yx^2 + x\). On peut considérer \(I = (x)\). \(f_0 = x \in I\) et \(f_0 = x \not\in I^2\), 
+    \(f_1 = x^2 \in I\) et \(f_2 = 1 \not\in I\). On en déduit que \(f\) est irréductible dans \(\C[x][y]\).
+\end{example}
+De manière générale, on a le corollaire suivant :
+\begin{corollary} Soit \(f\in \mathcal{A}[x,y]\) sous la forme \(f = \sum_{i=0}^d f_i(x)y^i\). 
+    Si les \(f_i\) sont premiers entre eux et qu'il existe un polynôme irréductible \(p(x)\) tel que 
+    \(p(x)\) divise tous les \(f_i\) sauf le dernier et que \(p^2(x)\) ne divise pas \(f_0\), alors \(f\) est irréductible dans \(\mathcal{A}[x,y]\).
+\end{corollary}
+Le critère d'Eisenstein s'applique plus souvent sur des polynômes à coefficients entiers.
+On peut par exemple établir l'irréductibilité du \(p\)-ième polynôme cyclotomique.
+\begin{equation}
+    \Phi_p(X) = \frac{X^p-1}{X-1} = X^{p-1} + X^{p-2} + \ldots + 1.
+\end{equation}
+\begin{corollary}
+    Le \(p\)-ième polynôme cyclotomique est irréductible dans \(\Q[X]\).
+\end{corollary}
+\begin{proof} On calcule d'abord \(\Phi_p(X+1)\)
+    \begin{equation}
+        \Phi_p(X+1) = \frac{(X+1)^P-1}{X} = \sum_{i=1}^p \binom{p}{i}X^{i-1}.
+    \end{equation}
+    D'après le critère d'Eisenstein avec \(p\), \(\Phi_p(X+1)\) est irréductible dans \(\Q[X]\).
+    (\(p\) divise \(\binom{p}{i}\) pour \(i\in\{1,...,p-1\}\), \(p^2\) ne divise pas \(\binom{p}{1}\) et \(p\) ne divise pas \(\binom{p}{p}\)). 
+    Si \(\Phi_p\) était réductible, alors il existerait \(R,Q\in \Q[X]\) tels que \(\Phi_p = RQ\). On aurait alors
+    \begin{equation}
+        \Phi_p(X+1) = R(X+1)Q(X+1) = R'(X)Q'(X).
+    \end{equation}
+    Ce qui contredirait l'irréductibilité de \(\Phi_p(X+1)\).
+\end{proof}
+On conclut par un dernier corollaire intéressant.
+\begin{corollary} \(\Q[X]\) admet des polynômes irréductibles de degré arbitrairement grand.
+\end{corollary}
+\begin{proof} On pose \(P_n = X^n - 2\). On a directement par le critère d'Eisenstein que \(P_n\) est irréductible dans \(\Q[X]\).
+\end{proof}
+
+\end{document}
