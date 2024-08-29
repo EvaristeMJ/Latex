@@ -1,0 +1,171 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Nombres de Bell}
+\begin{abstract} On note \(b_n\) le nombre de partitions d'un ensemble à \(n\) éléments.
+    On montre que
+    \begin{equation}
+        b_n = \frac{1}{e}\sum_{k=0}^{\infty}\frac{k^n}{k!}.
+    \end{equation}
+\end{abstract}
+Par convention, on pose \(b_0=1\). On pourrait débattre philosophiquement du nombre de partitions
+du vide mais tout est plus simple avec \(b_0=1\).
+\\
+Le dénombrement de ces partitions se fera principalement par une étude de 
+fonctions génératrices.
+\begin{definition} Soit \(a\) une suite. On appelle fonction génératrice exponentielle de \(a\)
+    la série formelle
+    \begin{equation}
+        A(x) = \sum_{n=0}^{\infty}\frac{a_n}{n!}x^n.
+    \end{equation}
+\end{definition}
+Les fonctions génératrices sont des outils puissants. En particulier, elles caractérisent
+complètement une suite, i.e.
+\begin{equation}
+    A = C \iff \forall n, a_n = c_n.
+\end{equation}
+\begin{lemma} Soit \(u,v\) deux suites et \(U,V\) leur FGE. On a 
+    \begin{equation}
+        U(x)V(x) = \sum_{n=0}^{\infty}\left(\sum_{k=0}^n \binom{n}{k} u_kv_{n-k}\right)\frac{x^n}{n!}.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    \begin{align}
+        U(x)V(x) &= \sum_{n=0}^{\infty}\left(\sum_{k=0}^n \frac{u_k}{k!}\frac{v_{n-k}}{(n-k)!}\right)x^n\\
+        & = \sum_{n=0}^{\infty}\left(\sum_{k=0}^n \frac{1}{n!}\frac{n!}{(n-k)!k!}u_{k}v_{n-k}\right)x^n\\
+        & = \sum_{n=0}^{\infty}\left(\sum_{k=0}^n \binom{n}{k}u_{k}v_{n-k}\right)\frac{x^n}{n!}
+    \end{align}
+\end{proof}
+
+Dans ce genre de dénombrement, on exhibe une relation de récurrence pour exprimer différemment
+la fonction génératrice.
+\begin{proposition}
+    \begin{equation}
+        b_{n+1} = \sum_{k=0}^n \binom{n}{k}b_k.
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    On considère \(\{1,...,n+1\}\). Sans perte de généralité, on suppose que \(n+1\) est 
+    dans une partition non-vide \(P\). On fixe ensuite \(k+1\) la taille de \(P\). Il y a
+    \(k\) éléments à choisir parmi \(n\) pour former \(P\). Il reste \(n-k\) éléments à
+    partitionner. On a donc \(b_{n-k}\) façons de le faire par définition. On somme
+    sur \(k\) pour obtenir le résultat.
+    \begin{equation}
+        b_{n+1} = \sum_{k=0}^n \binom{n}{k}b_{n-k}.
+    \end{equation}
+    Il suffit de renverser la somme et d'utiliser la symétrie du binôme pour conclure.
+\end{proof}
+\begin{proposition} On a 
+    \begin{equation}
+        B'(x) = B(x)e^x.
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    \begin{align}
+        B'(x) & = \sum_{n=0}^{\infty}\frac{b_{n+1}}{n!}x^n\\
+        & = \sum_{n=0}^{\infty}\frac{1}{n!}\sum_{k=0}^n \binom{n}{k}b_kx^n\\
+    \end{align}
+    Cela peut être vu comme une convolution de \(b\) avec la suite constante égale à \(1\).
+    \begin{equation}
+        B'(x) = B(x)\sum_{n=0}^{\infty}\frac{x^n}{n!} = B(x)e^x.
+    \end{equation}
+\end{proof}
+\begin{theorem} On a 
+    \begin{equation}
+        b_n = \frac{1}{e}\sum_{k=0}^{\infty}\frac{k^n}{k!}.
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Il suffit de résoudre l'équation différentielle:
+    \begin{equation}
+        B'(x) = B(x)e^x, \quad B(0) = 1.
+    \end{equation}
+    La solution est unique et est donnée par
+    \begin{equation}
+        B(x) = \frac{1}{e}e^{e^x}.
+    \end{equation}
+    On peut ensuite écrire le terme de droite sous la forme d'une série exponentielle :
+    \begin{align}
+        e^{e^x} &= \sum_{n=0}^{\infty}\frac{1}{n!}(e^x)^n\\
+        &= \sum_{n=0}^\infty \frac{1}{n!} \sum_{k=0}^\infty \frac{(xn)^k}{k!}\\
+        & = \sum_{n=0}^\infty \sum_{k=0}^\infty \frac{n^k}{k!n!}x^k\\
+        &= \sum_{k=0}^\infty \frac{1}{k!}\sum_{n=0}^\infty \frac{n^k}{n!}x^k.
+        \end{align}
+    Donc \(e^{e^x}\) est la série exponentielle de \(\sum_{k=0}^\infty \frac{k^n}{k!}\).
+    On a donc, par égalité des fonctions génératrices,
+    \begin{equation}
+        b_n = \frac{1}{e}\sum_{k=0}^{\infty}\frac{k^n}{k!}.
+    \end{equation}
+\end{proof}
+La présence d'une somme infinie dans la formule peut être considérée comme moralement gênante.
+On peut cependant exprimer \(b_n\) à l'aide d'une somme finie. D'ailleurs, une première
+manière de le faire est de calculer une approximation (pas trop mauvaise) de la somme puis de
+prendre la partie entière. Avec l'inconvénient que l'on ne sait pas jusqu'où calculer.
+On montre dans la prochaine proposition qu'il suffit de le faire jusqu'à \(2n-1\).
+\begin{proposition} Soit \(n\ge 1\) un entier naturel. On a 
+    \begin{equation}
+        b_n = \lfloor\frac{1}{e}\sum_{k=0}^{2n-1}\frac{k^n}{n!}\rfloor + 1.
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    On commence par montrer le lemme suivant.
+    \begin{lemma} Soit \(n\ge 1\), on a
+        \begin{equation}
+            \left(1+\frac{1}{n}\right)^n< 2n+1.
+        \end{equation}
+    \end{lemma}
+    \begin{proof}[du lemme]
+        Pour \(n=1\), \(2<3\). On considère le résultat vrai pour \(n\),
+        \(\left(1+\frac{1}{n+1}\right)^n < \left(1+\frac{1}{n}\right)^n < 2n+1\).
+        On a 
+        \begin{align}
+            \left(1+\frac{1}{n+1}\right)^{n+1} &= \left(1+\frac{1}{n+1}\right)^n\left(1+\frac{1}{n+1}\right)\\
+            &< (2n+1)\left(1+\frac{1}{n+1}\right)\\
+            &= 2n+1+\frac{2n+1}{n+1}\\
+            &= 2n+1 + 2 - \frac{1}{n+1}\\
+            &< 2(n+1) + 1.
+        \end{align}
+    \end{proof}
+    Remarquons ensuite que \((2n)^n\le (2n)!\). En effet, on a 
+    \begin{equation}
+        \frac{(2n)^n}{(2n)!} = \underbrace{\frac{2^n}{n!}}_{\le 2} \underbrace{\frac{n^n}{(n+1)\ldots 2n}}_{\le \frac{1}{2}} \le 1.
+    \end{equation}
+    On remarquera ensuite que \(\left(\frac{K^n}{K!}\right)_{K\ge 2n}\) est décroissante et donc que
+    \begin{equation}
+        \forall K \ge 2n, \frac{K^n}{K!} \le \frac{(2n)^n}{(2n)!} \le 1.
+    \end{equation}
+    On considère maintenant \(K \ge 2n\). On a pour \(j\ge 0\),
+    \begin{equation}
+        \frac{(K+j)^n}{(K+j)!}\le \frac{1}{j!}\frac{K^n}{K!}.
+    \end{equation}
+    En effet, remarquons que 
+    \begin{align}
+        \frac{(K+j)!}{K!j!} & = \frac{1}{K!}(K+j)\ldots (j+1)\\
+        &= \left(\frac{K}{K} + \frac{j}{K}\right)\ldots \left(\frac{1}{1} + \frac{j}{1}\right)\\
+        & = \left(1 + \frac{j}{K}\right)\ldots \left(1 + j\right)\\
+        & \ge \left(1+\frac{j}{K}\right)^K \\
+        &\ge \left(1+\frac{j}{K}\right)^n
+    \end{align}
+    On arrange alors
+    \begin{equation}
+        \frac{(K+j)^n}{K^n} \le \frac{(K+j)!}{j!K!}.
+    \end{equation}
+    Et finalement l'inégalité souhaitée. On déduit de nos résultats précédents :
+    \begin{equation}
+        \frac{(K+j)^n}{(K+j)!}\le \frac{1}{j!}\frac{K^n}{K!} \le \frac{1}{j!}
+    \end{equation} On peut alors conclure notre résultat :
+    \begin{align}
+        b_n &= \frac{1}{e}\sum_{k=0}^\infty \frac{k^n}{k!}\\
+        & = \frac{1}{e}\left(\sum_{k=0}^{K-1}\frac{k^n}{k!} + \sum_{k=K}^\infty \frac{k^n}{k!}\right)\\
+        & = \frac{1}{e}\left(\sum_{k=0}^{K-1}\frac{k^n}{k!}+ \sum_{j=0}^\infty \frac{(K+j)^n}{(K+j)!}\right)\\
+    \end{align}
+    On a alors
+    \begin{equation}
+        0 < b_n - \frac{1}{e}\sum_{k=0}^{K}\frac{k^n}{k!} \le 1.
+    \end{equation}
+    D'où 
+    \begin{equation}
+        b_n = \left\lfloor\frac{1}{e}\sum_{k=0}^{K-1}\frac{k^n}{k!}\right\rfloor + 1.
+    \end{equation}
+    En particulier, on peut prendre \(K=2n-1\).
+\end{proof}
+\end{document}
