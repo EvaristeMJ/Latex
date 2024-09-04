@@ -1,0 +1,94 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Nombre de Catalan}
+\begin{abstract}
+    On note \(c_n\) le nombre de parenthésages bien formés de longueur \(2n\), on parle aussi
+    de chemins de Dyck. Ce nombre est appelé le \(n\)-ième nombre de Catalan. On montre que \(c_n = \frac{1}{n+1}\binom{2n}{n}\).
+\end{abstract}
+\begin{proposition} On a 
+    \begin{equation}
+        c_{n+1} = \sum_{k=0}^n c_kc_{n-k}
+    \end{equation}
+\end{proposition}
+\begin{proof} On considère un parenthésage bien formé \(w\) de longueur \(2(n+1)\). On peut
+    le décomposer en deux sous-parenthésages \(x\) et \(y\) de longueurs respectives \(2k\) et \(2(n-k)\) pour un certain \(k\).
+    \begin{equation}
+        w = (x)y
+    \end{equation}
+    Ainsi, pour \(k\) fixé, il y a \(c_k\) façons de choisir \(x\) et \(c_{n-k}\) façons de choisir \(y\). On a donc
+    \(c_kc_{n-k}\) façons de choisir \(x\) et \(y\). En sommant sur \(k\), on obtient le résultat :
+    \begin{equation}
+        c_{n+1} = \sum_{k=0}^n c_kc_{n-k}
+    \end{equation}
+\end{proof}
+On considère \(C(x) = \sum_{n=0}^\infty c_nx^n\).
+\begin{proposition}
+    \begin{equation}
+        C(x) = 1 + xC(x)^2
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    \begin{align}
+        C(x) & = 1 + \sum_{n=1}^\infty c_nx^n\\
+        & = 1 + x\sum_{n=0}^\infty c_{n+1}x^n\\
+        &= 1 + x \sum_{n=0}^\infty \sum_{k=0}^n c_kc_{n-k}x^n\\
+        & = 1 + x C(x)^2
+    \end{align}
+\end{proof}
+Cela donne une equation du second degré pour \(C(x)\), on a 
+\begin{equation}
+    C(x) = \frac{1 + \epsilon(x) \sqrt{1-4x}}{2x}
+\end{equation}
+Remarquons que \(\epsilon\) n'est pas constante a priori. Cependant, \(\epsilon\) est 
+continue et \(C(0)=-1\). Les seules valeurs de \(\epsilon\) sont \(1\) et \(-1\), le 
+théorème des valeurs intermédiaires implique que \(\epsilon\) est constante. On en déduit
+\begin{equation}
+    C(x) = \frac{1 - \sqrt{1-4x}}{2x}.
+\end{equation}
+Il suffit ensuite d'exprimer le terme de droite en série entière.
+\begin{proposition}
+    \begin{equation}
+        c_n = \frac{1}{n+1}\binom{2n}{n}
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    On a 
+    \begin{align}
+        C(x) & = \frac{1 - \sqrt{1-4x}}{2x}\\
+        & = -\frac{1}{2x}\sum_{n=1}^\infty \binom{1/2}{n}(-4x)^n\\
+    \end{align}
+    De plus, on a 
+    \begin{align}
+        \binom{1/2}{n} &= \frac{1/2(1/2-1)\ldots(1/2-n+1)}{n!}\\
+        & = \frac{(-1)^{n-1}(2n-3)(2n-5)\ldots 1}{2^n n!}\\
+        & = \frac{(-1)^{n-1}(2n-2)!}{2^{2n-1} n! (n-1)!}\\
+        & = \frac{(-1)^{n-1}}{2^{2n-1}n}\binom{2n-2}{n-1}
+    \end{align}
+    On en déduit 
+    \begin{align}
+        C(x) &= -\frac{1}{2x}\sum_{n=1}^\infty \frac{(-1)^{n-1}}{2^{2n-1}n}\binom{2n-2}{n-1}(-4x)^n\\
+        & =\sum_{n=1}^\infty \frac{(-1)^{n}}{2^{2n}n}\binom{2n-2}{n-1}(-1)^n2^{2n}x^{n-1}\\
+        & = \sum_{n=1}^\infty \frac{1}{n}\binom{2n-2}{n-1}x^{n-1}\\
+        & = \sum_{n=0}^\infty \frac{1}{n+1}\binom{2n}{n}x^n
+    \end{align}
+    Par unicité de la série entière, on a \(c_n = \frac{1}{n+1}\binom{2n}{n}\).
+\end{proof}
+\begin{corollary}
+    \begin{equation}
+        c_n \sim \frac{4^n}{n^{3/2}\sqrt{\pi}}
+    \end{equation}
+\end{corollary}
+\begin{proof}
+    On rappelle la formule de Stirling :
+    \begin{equation}
+        n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n
+    \end{equation}
+    On a alors 
+    \begin{align}
+        c_n & = \frac{1}{n+1}\binom{2n}{n}\\
+        & = \frac{1}{n+1}\frac{(2n)!}{n!n!}\\
+        & \sim \frac{1}{n+1}\frac{\sqrt{4\pi n}(2n)^{2n}e^{-2n}}{2\pi n n e^{-2n}}\\
+        & \sim \frac{4^n}{n^{3/2}\sqrt{\pi}}.
+    \end{align}
+\end{proof}
+\end{document}
