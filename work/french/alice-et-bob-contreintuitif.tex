@@ -1,0 +1,34 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mdframed}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+
+\usepackage{mdframed}
+
+\newcommand*{\R}{\mathbb{R}}
+\newcommand*{\C}{\mathbb{C}}
+\newcommand*{\N}{\mathbb{N}}
+\newcommand*{\Z}{\mathbb{Z}}
+\newcommand*{\Q}{\mathbb{Q}}
+\newcommand*{\F}{\mathbb{F}}
+\newcommand*{\P}{\mathbb{P}}
+\newcommand*{\K}{\mathbb{K}}
+
+\begin{document}
+Supposons que Alice et Bob jouent à un jeu. Ils réalisent \(100\) lancers de pièces.
+Alice lit les résultats de lancer des pièces \(1,2,...,100\) et Bob lit les résultats 
+de lancer des pièces \(1,3,5,...,99\) puis des pièces \(2,4,6,...,100\). Ils lisent 
+simultanément les pièces (donc Alice lit 1, Bob lit 1, Alice lit 2, Bob lit 3, etc). Dès 
+que l'un d'eux lit deux piles de suite, il gagne. Qui a le plus de chance de gagner?\\
+
+Tant que Bob perd, Alice lit une séquence de résultats conditionnées. Pour résumer, Alice
+deux cas :
+Si c'est une pièce paire, elle est entre deux pièces déjà lues par Bob. Si on note 
+\(X\) cette pièce, elle observera \(FXP\), \(FXF\) ou \(PXF\). Remarquons qu'elle ne peut pas gagner avec \(FXF\).
+\begin{equation}
+    \P(A_i) = \P(B_i^c)\P(A_i|B^c_i) = \frac{1}{4}\P(B_i^c).
+\end{equation}
+
+\end{document}
