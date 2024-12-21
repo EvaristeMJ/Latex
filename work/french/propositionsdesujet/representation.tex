@@ -1,0 +1,423 @@
+\documentclass{article}[a4paper]
+\usepackage{biblatex}
+\usepackage{svg}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} 
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz,tkz-tab,tikz-cd} 
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\braket}[2]{\langle #1,#2\rangle}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\title{Représentation et marche aléatoire}
+\begin{document}
+\begin{abstract}
+    Ce sujet traite de la théorie des représentations pour des groupes abéliens finis. 
+    Une application proposée d'une telle théorie est la définition d'une transformée 
+    de Fourier sur des groupes généralisant de nombreux résultats que vous avez pu 
+    observer en physique. C'est l'occasion d'introduire les bases de l'analyse harmonique.
+\end{abstract}
+Dans tout le sujet, \((G,+)\) désignera un groupe abélien de cardinal \(n\). 
+On définit également l'ensemble des morphismes de groupe \(\widehat{G}\) de \((G,+)\) 
+vers \((\mathbb{C}^\times,\times)\) que l'on appelera \textit{groupe dual}.
+\\
+L'étude portera aussi sur le \(\C\)-espace vectoriel \(E = \C^G\) que l'on appelera 
+espace dual. Sur cet espace, nous définissons deux applications. 
+La première, notée \(\braket{.}{.} : E\times E \to \C\), sera appelée produit hermitien 
+et sera définie par 
+\begin{equation*}
+    \braket{f}{g} = \frac{1}{n}\sum_{x\in G} f(x)\overline{g(x)}.
+\end{equation*}
+La seconde, notée \(\cdot\star \cdot : E\times E \to E\), sera appelée produit de 
+convolution et sera définie par 
+\begin{equation*}
+    \forall x\in G, (f\star g)(x) = \frac{1}{n}\sum_{y\in G} f(y)g(x-y).
+\end{equation*}
+\section{Préliminaires}
+L'objectif de cette partie est de démontrer quelques propriétés essentielles.
+Un produit hermitien est une généralisation du produit scalaire appliqué à des espaces 
+complexes. Soit \(F\) un espace vectoriel complexe, une application 
+\(\phi : F\times F \to \C\) est appelée produit hermitien si elle vérifie les propriétés suivantes 
+pour tout \(f,g,h\in F\) et pour tout \(\lambda\in \C\):
+\begin{itemize}
+    \item \(\phi(f,g) = \overline{\braket{g}{f}}\),
+    \item \(\phi(f+\lambda g,h) = \phi(f,h)+\lambda\phi(g,h)\),
+    \item \(\phi(f,f) \in \R_+\),
+    \item \(\phi(f,f) = 0\) si et seulement si \(f = 0\).
+\end{itemize}
+On montre quelques résultats sur ces produits.
+\begin{enumerate}
+    \item Soit \(\phi\) un produit hermitien sur \(F\), montrer que pour tout \(f,g,h\in F\) et pour tout \(\lambda\in \C\),
+    \begin{equation*}
+        \phi(f,g+ \lambda h) = \phi(f,g) + \overline{\lambda}\phi(f,h)
+    \end{equation*}
+    \item On dit qu'une famille \(f_1,...,f_k\) est orthonormale si pour tout \(i,j\in \{1,...,k\},
+    \braket{f_i}{f_j} = \delta_{i,j}\). Montrer qu'une famille orthonormale est libre.
+    \item Montrer que \(\braket{\cdot}{\cdot}\) est un produit hermitien sur \(E\).
+    
+
+    On admet que \(\varphi\) sur \(\C^k\times \C^k\) défini par 
+    \begin{equation*}
+        \forall x,y\in \C^k, \varphi{x}{y} = \sum_{i=1}^k x_i\overline{y_i}
+    \end{equation*}
+    est un produit hermitien.
+    \item Une matrice \(U\in \mathcal{M}_k(\C)\) est dite unitaire si les colonnes de \(U\) forment 
+    une base orthonormale de \(\C^k\). 
+    Montrer qu'une matrice \(U\in \mathcal{M}_k(\C)\) est unitaire
+    si et seulement si elle vérifie \(\overline{U^T}U = I_k\).
+    \item Montrer que les vecteurs propres normalisés d'une matrice unitaire
+    forment une famille orthonormale de \(\C^k\).
+
+\end{enumerate}
+\subsection*{Correction de la première partie}
+\begin{enumerate}
+    \item On applique les différents axiomes
+    \begin{align*}
+        \phi(f,g+\lambda h) &= \overline{\phi(g+\lambda h,f)}\\
+        &= \overline{\phi(g,f)+\lambda\phi(h,f)}\\
+        &= \overline{\phi(g,f)}+\overline{\lambda}\overline{\phi(h,f)}\\
+        &= \phi(f,g) + \overline{\lambda}\phi(f,h).
+    \end{align*}
+    C'est ce qu'on appelle aussi la sesquilinéarité droite.
+    \item On suppose que \(\sum_{i=1}^k \lambda_i f_i = 0\) où \(\lambda_i\in \C\).
+    On a 
+    \begin{align*}
+        0 &= \braket{\sum_{i=1}^k \lambda_i f_i}{f_j}\\
+        &= \sum_{i=1}^k \lambda_i \braket{f_i}{f_j}\\
+        &= \lambda_j.
+    \end{align*}
+    \item On vérifie les propriétés.
+    \item Il suffit de faire les calculs. 
+    \begin{align*}
+        (\overline{U^T}U)_{i,j} & = \sum_{l=1}^k \overline{U_{l,i}}U_{l,j}\\
+        & = \braket{U_j}{U_i}\\
+        & = \delta_{i,j}.
+    \end{align*}
+    On a donc bien \(\overline{U^T}U = I_k\). La réciproque est immédiate.
+    \item Soit \(\lambda\) une valeur propre de \(U\) et \(v\) un vecteur propre normalisé associé. \(\braket{Ux}{Uy} = \overline{(Uy)^T}Ux = \overline{y^T}\overline{U^T}Ux = \braket{x}{y}\).
+    En particulier, \(\braket{Uv}{Uv} = \braket{v}{v} = \lvert\lambda\rvert^2 \braket{v}{v}\). Donc \(\lvert\lambda\rvert^2 = 1\).
+    \item Soit \(\lambda,\mu\) deux valeurs propres distinctes de \(U\) associées à \(v,w\).
+    On a 
+    \begin{align*}
+        \braket{v}{w} &= \braket{Uv}{Uw}\\
+        &= \lambda\overline{\mu}\braket{v}{w}.
+    \end{align*}
+    Si \(\braket{v}{w} \neq 0\), alors \(\lambda = \overline{\mu}^{-1}\). 
+    Or, \(\lvert\lambda\rvert = 1\), donc \(\mu = \overline{\overline{\mu}} = \lambda\).
+\end{enumerate}
+\section{Convolutions de fonctions}
+\begin{enumerate}
+    \item Montrer que \(\star\) est une loi commutative, associative et bilinéaire sur \(E\).
+    \item 
+\end{enumerate}
+\section{Caractères et groupe dual}
+L'objectif de cette partie est de déterminer une base orthonormale de \(E\) pour le produit hermitien.
+Cela se fera via l'étude de l'endormorphisme de translation \(\tau_y : E\to E\) avec \(y\in G\) défini par
+\begin{equation*}
+    \forall x\in G, \tau_y(f)(x) = f(x-y).
+\end{equation*}
+\begin{enumerate}
+    \item Montrer que \(y\mapsto \tau_y\) est un morphisme de groupe de \(G\) dans \(\mathcal{GL}(E)\).
+    \item Montrer que \(T_y\) est unitaire pour tout \(y\in G\).
+    \item Montrer que si \(\chi \in \widehat{G}\), i.e. \(\chi\) est un morphisme de groupe de \(G\) dans \(\C^\times\), 
+    alors \(\chi\) est un vecteur propre de \(\tau_y\).
+    \item Montrer que \(\tau_y\) est diagonalisable.
+    \item En déduire qu'il existe \(\chi_1,\dots,\chi_n\in \widehat{G}\) distincts tels que 
+    \begin{equation*}
+        \forall y\in G, \mathrm{mat}_{\chi_1,\dots, \chi_n}(T_y) = \begin{pmatrix}
+            \chi_1(y) & 0 & \dots & 0\\
+            0 & \chi_2(y) & \dots & 0\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & \dots & \chi_n(y)
+        \end{pmatrix}.
+    \end{equation*}
+    \item Montrer que \(\widehat{G} = \{\chi_1,\dots,\chi_n\}\) et que 
+    \((\widehat{G},\times)\) forme un groupe abélien. En déduire que 
+    \((\widehat{G},\times)\) est isomorphe à \((G,+)\).
+    \item Montrer que \(\chi_1,\dots,\chi_n\) forment une base orthonormale de \(E\).
+    \item Montrer que pour tout 
+    \begin{equation*}
+        \sum_{\chi \in \widehat{G}} \chi(x) = \begin{cases}
+            n & \text{ si } x = 0\\
+            0 & \text{ sinon}.
+        \end{cases}
+    \end{equation*}
+\end{enumerate}
+\subsection{Caractères de \(\Z/n\Z\)}
+\begin{enumerate}
+    \item Montrer que l'endormorphisme \(\tau_1\) peut-être représenté par la matrice 
+    \begin{equation*}
+        T = \begin{pmatrix}
+            0 & 1 & 0 & \dots & 0\\
+            0 & 0 & 1 & \dots & 0\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & \dots & 0 & 1\\
+            1 & 0 & \dots & 0 & 0
+        \end{pmatrix}.
+    \end{equation*}
+    \item Montrer que les valeurs propres de \(T\) sont les racines \(n\)-ièmes de l'unité.
+    En déduire l'ensemble des caractères de \(\Z/n\Z\).
+    \item En déduire qu'on peut indexer les caractères \(\chi_i\) de \(\Z/n\Z\) par des 
+    \(l\in \Z/n\Z\) de sorte que 
+    \begin{equation*}
+        \forall k\in \Z/n\Z, \chi_l\chi_{-l'} = \chi_{l-l'}.
+    \end{equation*}
+    En conclure que \(\widehat{\Z/n\Z}\) est isomorphe à \(\Z/n\Z\).
+    \subsection{Caractère d'un produit de groupes}
+    Dans cette partie, on considère un groupe \(G = G_1\times \dots G_k\) tel que 
+    \(\mathrm{card}(G) = n\).
+    \begin{enumerate}
+        \item Soient \(\chi^{(1)},\dots,\chi^{(k)}\) des caractères de \(G_1,\dots, G_k\).
+        Montrer que \(\chi^{(1)}\times\dots\times\chi^{(k)} \) est un caractère de \(G\).
+        \item Montrer alors que 
+        \begin{equation*}
+            \widehat{G} = \{\chi^{(1)}\times\dots\times\chi^{(k)},\;\; \chi^{(1)}\in \widehat{G_1},\dots, \chi^{(k)}\in \widehat{G_k}\}.
+        \end{equation*}
+        \item En déduire que \(\widehat{G}\) est isomorphe à \(G\).
+        \item On considère le groupe \(G = (\Z/2\Z)^n\), montrer que les caractères de \(G\)
+        sont de la forme 
+        \begin{equation*}
+            \chi_x(y) = (-1)^{\sum_{i=1}^n x_iy_i}.
+        \end{equation*}
+    \end{enumerate}
+\end{enumerate}
+On admettra désormais que le groupe dual \(\widehat{G}\) est 
+toujours isomorphe à \(G\) dans le cas des groupes abéliens finis. On notera 
+\(\chi_x\) le caractère associé à \(x\in G\). 
+\subsection*{Correction de la troisième partie}
+\begin{enumerate}
+    \item On vérifie les propriétés.
+    \item On peut le vérifier de plusieurs manières. La première est de vérifier que l'image de 
+    d'une base orthonormale est encore une base orthonormale. On prend, par exemple, la base des 
+    \(\{\delta_x,x\in G\}\). 
+    \begin{equation*}
+        \braket{\tau_y\delta_x}{\tau_y\delta_z} = \braket{\delta_{x-y}}{\delta_{z-y}} = \delta_{x-y,z-y} = \delta_{x,z}.
+    \end{equation*}
+    Ce qui permet de conclure que \(\tau_y\) sera unitaire. Sinon, on peut aussi vérifier que l'inverse 
+    de \(T_y\) est \(\overline{T_y^T}\). On a \(T_y^{-1} = T_{-y}\). On ensuite vérifier 
+    pour chaque \(\delta_x\) que \(\overline{T_y^T} = T_{-y}\).
+    \item On considère un morphisme \(\chi\). On a par définition 
+    \begin{equation*}
+        \forall x\in G, \;\tau_y(\chi)(x) = \chi(x+y) = \chi(y)\chi(x).
+    \end{equation*}
+    Donc \(\chi\) est un vecteur propre de \(\tau_y\) associé à la valeur propre \(\chi(y)\).
+    \item On utilise le fait que \(\tau_y^n = \tau_{ny} = \tau_{0} = \mathrm{id}\). On en 
+    déduit que \(X^n -1\) est annulateur de \(\tau_y\). Donc \(\tau_y\) est diagonalisable car 
+    il est annulé par un polynôme scindé à racines simples.
+    \item On sait qu'il existe alors une base commune de diagonalisation pour tous les \(y\) de \(\C^G\) formée de vecteurs propres de \(\tau_y\), on les note 
+    \(\chi_1,\dots,\chi_n\). On vérifie que \(\chi_i\in \widehat{G}\) simplement. 
+    \item On a vu qu'il y a au moins autant de valeur propres distinctes que de morphismes de groupe.
+    Le résultat précédent montre que l'ensemble des valeurs propres est inclus dans \(\widehat{G}\).
+    On en déduit que \(\widehat{G} = \{\chi_1,\dots,\chi_n\}\). On montre simplement la structure de groupe de \(\widehat{G}\).
+    \item Les \(\chi_i\) forment une base car ce sont des vecteurs propres. Et d'après la partie préliminaire, 
+    ces vecteurs sont orthogonaux. Il reste à montrer que ces vecteurs sont de norme 1.
+    \begin{align*}
+        \braket{\chi_i}{\chi_i} &= \frac{1}{n}\sum_{x\in G} \chi_i(x)\overline{\chi_i(x)}\\
+        &= \frac{1}{n}\sum_{x\in G} \lvert\chi(x)\rvert^2\\
+        &= 1.
+    \end{align*}
+    car les \(\chi_i(x)\) sont les valeurs propres de \(\tau_x\) qui est unitaire (donc les
+    valeurs propres sont de module 1).
+    \item Notons \(S(x) = \sum_{\chi\in \widehat{G}}\chi(x)\). Si \(x = 0\), on a facilement
+    \(S(0) = n\). Sinon, on peut utiliser le fait que \(\chi \mapsto \chi' \chi\) soit 
+    une bijection de \(\widehat{G}\) sur lui-même. On a
+    \begin{align*}
+        S(x) &=  \sum_{\chi\in \widehat{G}}\chi(x)\\
+        &= \sum_{\chi\in \widehat{G}}\chi'(x)\chi(x)\\
+        &= \chi'(x)\sum_{\chi\in \widehat{G}}\chi(x)\\
+        & = \chi'(x)S(x).
+    \end{align*}
+    Or, pour tout \(x\neq 0\), il existe un \(\chi'\) tel \(\chi'(x) \neq 1\). On en conclut 
+    que \(S(x) = 0\).
+\end{enumerate}
+\subsubsection*{Correction des questions sur \(\Z/n\Z\)}
+\begin{enumerate}
+    \item Si on considère à la base \(\{\delta_i\}\), on a \(\tau_1(\delta_i) = \delta_{i-1}\) pour \(i\) 
+    différent de \(0\), et pour \(i=0\) on a \(\tau_1(\delta_{0}) = \delta_{n-1}\). On a donc
+    \begin{equation*}
+        \mathrm{mat}_{\delta_0,\dots,\delta_{n-1}}(\tau_1) = \begin{pmatrix}
+            0 & 1 & 0 & \dots & 0\\
+            0 & 0 & 1 & \dots & 0\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & \dots & 0 & 1\\
+            1 & 0 & \dots & 0 & 0
+        \end{pmatrix}.
+    \end{equation*}
+    \item Un calcul de valeur propre...
+    \item Il suffit d'associer à chaque \(l\in \Z/n\Z\) le caractère \(\chi_l\) défini par
+    \begin{equation*}
+        \forall k\in \Z/n\Z, \chi_l(k) = \exp\left(\frac{2i\pi lk}{n}\right).
+    \end{equation*}
+    On vérifie alors que \(\chi_l\chi_{-l'} = \chi_{l-l'}\). \(\chi(l) = 1\) si et seulement 
+    si \(l=0\), donc \(l\mapsto \chi_l\) est un isomorphisme de \(\Z/n\Z\) vers \(\widehat{\Z/n\Z}\).
+\end{enumerate}
+    \subsubsection*{Correction des questions sur les groupes produits}
+    \begin{enumerate}
+        \item On vérifie les propriétés. On considère \((0,...,0)\in G\), on a 
+        \begin{equation*}
+            \chi^{(1)}\times\dots\times\chi^{(k)}(0,...,0) = \chi^{(1)}(0)\times\dots\times\chi^{(k)}(0) = 1.
+        \end{equation*}
+        \begin{align*}
+            \chi^{(1)}\times\dots\times\chi^{(k)}((x_1,...,x_k)-(y_1,...,y_k)) &= \chi^{(1)}(x_1-y_1)\times\dots\times\chi^{(k)}(x_k-y_k)\\
+            &= \chi^{(1)}(x_1)\times\dots\times\chi^{(k)}(x_k)\chi^{(1)}(-y_1)\times\dots\times\chi^{(k)}(-y_k)\\
+            &= \chi^{(1)}(x_1)\times\dots\times\chi^{(k)}(x_k){\chi^{(1)}(y_1)}^{-1}\times\dots\times{\chi^{(k)}(y_k)}^{-1}\\
+        \end{align*}
+        Donc \(\chi^{(1)}\times\dots\times\chi^{(k)}\) est un caractère de \(G\).
+        \item \(\chi^{(1)}\times \dots\times  \chi^{(k)}(x_1,\dots, x_k) = \rho^{(1)}\times \dots\times \rho^{(k)}(x_1,\dots, x_k)\).
+        On peut appliquer, on note \(n_i\) le cardinal de \(G_i\), et on a pour tout \(j\)
+        \begin{equation*}
+            \chi^{(1)}\times \dots\times  \chi^{(k)}(n_1x_1,\dots,x_j,\dots, n_kx_k) = \rho^{(1)}\times \dots\times  \rho^{(k)}(n_1x_1,\dots,x_j,\dots, n_kx_k).
+        \end{equation*}
+        On en déduit que \(\chi_j(x_j) = \rho_j(x_j)\). Autrement dit, \(\prod_j \chi^{(j)} = \prod_j \rho^{(j)}\)
+        si et seulement si \(\chi^{(j)} = \rho^{(j)}\). Ainsi, les \(\prod_j \chi^{(j)}\) sont distincts et forment 
+        \(n_1\dots n_k = n\) morphismes de \(G\), donc \(\widehat{G} = \{\chi^{(1)}\times\dots\times\chi^{(k)},\;\; \chi^{(1)}\in \widehat{G_1},\dots, \chi^{(k)}\in \widehat{G_k}\}\)
+    \end{enumerate}
+\section{Transformée de Fourier}
+Pour une fonction \(f\in E\), on définit sa transformée de Fourier \(\hat{f}\) par 
+\begin{equation*}
+    \forall x\in G, \hat{f}(x) = n\braket{f}{\chi_x} = \sum_{y\in G} f(y)\overline{\chi_x(y)}.
+\end{equation*}
+On définit également la transformée de Fourier inverse par
+\begin{equation*}
+    \forall x\in G, \tilde{f}(x) = \frac{1}{n}\sum_{y\in G} f(y)\chi_y(x).
+\end{equation*}
+\begin{enumerate}
+    \item Montrer que \(f\mapsto \hat{f}\) est une application linéaire de \(E\) dans \(E\).
+    \item Montrer que pour tout \(f\in E\), on a \(\tilde{\hat{f}} = f\).
+    \item Montrer que pour tout \(f\in E\), 
+    \begin{equation*}
+        \sum_{x\in G} \lvert \hat{f}(x)\rvert^2 = n\sum_{x\in G} \lvert f(x)\rvert^2.
+    \end{equation*}
+    \item Montrer que pour tout \(f,g\in E\), on a
+    \begin{equation*}
+        \widehat{f\star g} = \hat{f}\hat{g}.
+    \end{equation*}
+\end{enumerate}
+\subsection*{Correction de la quatrième partie}
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\section{Marche aléatoire}
+On considère \((X^{(k)})_{k\in \N^*}\) une suite de variables aléatoires indépendantes
+et indentiquement distribuées sur \(G\). On définit la marche aléatoire \(S_k\) par 
+\begin{equation*}
+    S_k = \sum_{l=1}^k X^{(l)}.
+\end{equation*}
+On notera \(p^{(k)}(x) = \P(S_k = x)\).
+\begin{enumerate}
+    \item Montrer que pour tout \(k\in \N^*\), on a
+    \begin{equation*}
+        \overbrace{p\star \dots \star p}^k = p^{(k)}.
+    \end{equation*}
+    Une première question qu'on se posera sera de savoir si \(S_k\) se rapproche
+    de la loi uniforme \(\upsilon\) sur \(G\) pour la norme \(\ell^1\), i.e. étudier la 
+    quantité suivante 
+    \begin{equation*}
+        \norm{p^{(k)} - \upsilon}_1 = \sum_{x\in G} \left\lvert p^{(k)}(x) - \frac{1}{n}\right\rvert.
+    \end{equation*}
+    \begin{enumerate}
+        \item Montrer que pour tout \(k\in \N^*\), on a 
+        \begin{equation*}
+            \norm{p^{(k)}-\upsilon}_1 \le \sqrt{n} \norm{p-\upsilon}_2.
+        \end{equation*}
+        En déduire que pour tout \(k\in \N^*\), on a
+        \begin{equation*}
+            \norm{p^{(k)}-\upsilon}_1 \le \left\|\hat{p}^k - \widehat{\upsilon}\right\|_2
+        \end{equation*}
+        \item Montrer que pour tout \(k\in \N^*\), on a 
+        \begin{equation*}
+            \left\|\hat{p}^k - \widehat{\upsilon}\right\|_2^2 = \sum_{x\in G\setminus\{0\}} \lvert \hat{p}(x)\rvert^{2k}.
+        \end{equation*} 
+        \item On considère désormais que \(G = \Z/n\Z\) avec \(n\) impair et \(p(X=-1) = p(X=1) = \frac{1}{2}\).
+        Montrer que pour tout \(z\in [0,\pi/2[\), on a 
+        \begin{equation*}
+            \cos\left(\frac{2z\pi}{n}\right) \le e^{-\frac{z^2}{2}}
+        \end{equation*}
+        \item Pour tout \(k\in \N^*\), montrer que 
+        \begin{equation*}
+            \sum_{x=1}^{n-1}\cos\left(\frac{2\pi x}{n}\right)^{2k} = 2\sum_{x=1}^{\frac{n-1}{2}}\cos\left(\frac{2\pi x}{n}\right)^{2k} = 2\sum_{x=1}^{\frac{n-1}{2}}\cos\left(\frac{\pi x}{n}\right)^{2k}
+        \end{equation*}
+        En déduire l'inégalité suivante
+        \begin{equation*}
+        \norm{p^{(k)}-\upsilon}_1^2 \le 2e^{-\frac{k\pi^2}{n^2}}\sum_{x=1}^{\frac{n-1}{2}}e^{-\frac{\pi^2(x^2-1)k}{n^2}}
+        \end{equation*}
+        \item Montrer que pour \(x\in\{1,\dots,n-1\}\), \((x^2-1)\ge 3(x-1)\), et en déduire que 
+        \begin{equation*}
+            \norm{p^{(k)}-\upsilon}_1^2 \le 2\frac{e^{-\frac{k\pi^2}{n^2}}}{1- e^{-\frac{3k\pi^2}{n^2}}}
+        \end{equation*}
+    \end{enumerate}
+    \subsection{Retour à l'origine}
+    On s'intéresse désormais à la probabilité de retour à l'origine dans \((\Z/2\Z)^n\), i.e. 
+    \begin{equation*}
+        \P(S_{k} = 0).
+    \end{equation*}
+    On suppose de plus que \(p(e_i) = \frac{1}{n+1}\) où \(e_0 = 0\) et \(e_i\) correspond 
+    au n-uplet de \(0\) sauf en la \(i\)-ième position où il vaut \(1\). Pour tout \(x\in (\Z/2\Z)^n\), on note
+    \(w(x)\) le nombre de \(1\) dans \(x\).
+    \begin{enumerate}
+        \item On note \(\mathcal{B}_m = \{x\in (\Z/2\Z)^n,w(x)= m\}\). Montrer que 
+        \begin{equation*}
+            \mathrm{card}(\mathcal{B}_m) = \binom{n}{m}.
+        \end{equation*}
+        \item Montrer que pour tout \((x_1,\dots,x_n)\), on a 
+        \begin{equation*}
+            \hat{p}(x) = \frac{1+n-2w(x)}{n+1} = 1 - \frac{2w(x)}{n+1}.
+        \end{equation*}
+        \item En déduire que pour tout \(k\in \N^*\), on a
+        \begin{equation*}
+            p^{(k)}(0) = \frac{1}{2^n}\sum_{m=0}^n \binom{n}{m} \left(1 - \frac{2m}{n+1}\right)^k.
+        \end{equation*}
+        \begin{align*}
+            \frac{1}{2^n}\sum_{m=0}^n \binom{n}{m} \left(1 - \frac{2m}{n+1}\right)^{2k} 
+            &\le \left(1-\frac{2}{n+1}\right)^k\frac{1}{2^n}\sum_{m=0}^n \binom{n}{m}\\
+            & = \left(1-\frac{2}{n+1}\right)^k.
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
+\subsection*{Correction de la cinquième partie}
+\begin{enumerate}
+    \item Généralement, on considère deux variables aléatoires indépendantes \(X\) et \(Y\). 
+    La loi de \(X+Y\) sera donné par la convolution des lois de \(X\) et \(Y\). On a 
+    \begin{align*}
+        \P(X+Y = x) &= \sum_{y\in G} \P(X+Y = x,Y = y)\\
+        &= \sum_{y\in G} \P(X = x-y,Y = y)\\
+        &= \sum_{y\in G} \P(X = x-y)\P(Y = y).
+    \end{align*}
+    On fait ensuite la preuve par récurrence. \(p^{(1)} = p\). On suppose que 
+    \(\overbrace{p\star \dots \star p}^k = p^{(k)}\). On a \(S_{k+1} = S_k + X^{(k+1)}\) avec 
+    \(S_k\) et \(X^{(k+1)}\) indépendants. On a donc
+    \begin{equation*}
+        p^{(k+1)} = p^{(k)}\star p = \overbrace{p\star \dots \star p}^{k+1}.
+    \end{equation*}
+    \begin{enumerate}
+        \item On utilise l'inégalité de Cauchy-Schwarz pour passer de la norme 1 à la norme 2.
+        On utilise ensuite l'égalité de Plancherel.
+        \item On remarque que \(\upsilon = \chi_0\) et \(\hat{p^{(k)}}(0) = n\)
+        \begin{align*}
+        \left\|\hat{p}^k - \widehat{\upsilon}\right\|_2^2 &= \sum_{x\in G} \lvert \hat{p}^k(x) - \widehat{\upsilon}(x)\rvert^2\\
+        &= \sum_{x\in G}\left\lvert \hat{p^{(k)}}(x) - n\braket{\chi_0}{\chi_x} \right\rvert^2\\
+        & = \sum_{x\in G\setminus\{0\}} \lvert \hat{p}(x)\rvert^{2k}.
+        \end{align*}
+        \item On commmence par calculer \(\hat{p}(x)\). On a 
+        \begin{align*}
+            \hat{p}(x) &= \sum_{y\in G} p(y)\overline{\chi_x(y)}\\
+            &= \frac{1}{2}\left(\chi_{-1}(x) + \chi_1(x)\right)\\
+            &= \frac{1}{2}\left(e^{-\frac{2x\pi}{n}}+ e^{\frac{2x\pi}{n}}\right)\\
+            &= \cos\left(\frac{2\pi x}{n}\right)
+        \end{align*}
+        On a donc 
+        \begin{equation*}
+            \norm{p^{(k)}-\upsilon}^2 \le \sum_{x = 1}^{n-1}\cos\left(\frac{2\pi x}{n}\right)^{2k}.
+        \end{equation*}
+    \end{enumerate}
+\end{enumerate}
+\end{document}
