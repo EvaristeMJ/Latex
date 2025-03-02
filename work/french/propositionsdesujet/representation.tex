@@ -193,6 +193,29 @@ Cela se fera via l'étude de l'endormorphisme de translation \(\tau_y : E\to E\)
 On admettra désormais que le groupe dual \(\widehat{G}\) est 
 toujours isomorphe à \(G\) dans le cas des groupes abéliens finis. On notera 
 \(\chi_x\) le caractère associé à \(x\in G\). 
+
+\section{Transformée de Fourier}
+Pour une fonction \(f\in E\), on définit sa transformée de Fourier \(\hat{f}\) par 
+\begin{equation*}
+    \forall x\in G, \hat{f}(x) = n\braket{f}{\chi_x} = \sum_{y\in G} f(y)\overline{\chi_x(y)}.
+\end{equation*}
+On définit également la transformée de Fourier inverse par
+\begin{equation*}
+    \forall x\in G, \tilde{f}(x) = \frac{1}{n}\sum_{y\in G} f(y)\chi_y(x).
+\end{equation*}
+\begin{enumerate}
+    \item Montrer que \(f\mapsto \hat{f}\) est une application linéaire de \(E\) dans \(E\).
+    \item Montrer que pour tout \(f\in E\), on a \(\tilde{\hat{f}} = f\).
+    \item Montrer que pour tout \(f\in E\), 
+    \begin{equation*}
+        \sum_{x\in G} \lvert \hat{f}(x)\rvert^2 = n\sum_{x\in G} \lvert f(x)\rvert^2.
+    \end{equation*}
+    \item Montrer que pour tout \(f,g\in E\), on a
+    \begin{equation*}
+        \widehat{f\star g} = \hat{f}\hat{g}.
+    \end{equation*}
+\end{enumerate}
+
 \subsection*{Correction de la troisième partie}
 \begin{enumerate}
     \item On vérifie les propriétés.
@@ -281,27 +304,6 @@ toujours isomorphe à \(G\) dans le cas des groupes abéliens finis. On notera
         si et seulement si \(\chi^{(j)} = \rho^{(j)}\). Ainsi, les \(\prod_j \chi^{(j)}\) sont distincts et forment 
         \(n_1\dots n_k = n\) morphismes de \(G\), donc \(\widehat{G} = \{\chi^{(1)}\times\dots\times\chi^{(k)},\;\; \chi^{(1)}\in \widehat{G_1},\dots, \chi^{(k)}\in \widehat{G_k}\}\)
     \end{enumerate}
-\section{Transformée de Fourier}
-Pour une fonction \(f\in E\), on définit sa transformée de Fourier \(\hat{f}\) par 
-\begin{equation*}
-    \forall x\in G, \hat{f}(x) = n\braket{f}{\chi_x} = \sum_{y\in G} f(y)\overline{\chi_x(y)}.
-\end{equation*}
-On définit également la transformée de Fourier inverse par
-\begin{equation*}
-    \forall x\in G, \tilde{f}(x) = \frac{1}{n}\sum_{y\in G} f(y)\chi_y(x).
-\end{equation*}
-\begin{enumerate}
-    \item Montrer que \(f\mapsto \hat{f}\) est une application linéaire de \(E\) dans \(E\).
-    \item Montrer que pour tout \(f\in E\), on a \(\tilde{\hat{f}} = f\).
-    \item Montrer que pour tout \(f\in E\), 
-    \begin{equation*}
-        \sum_{x\in G} \lvert \hat{f}(x)\rvert^2 = n\sum_{x\in G} \lvert f(x)\rvert^2.
-    \end{equation*}
-    \item Montrer que pour tout \(f,g\in E\), on a
-    \begin{equation*}
-        \widehat{f\star g} = \hat{f}\hat{g}.
-    \end{equation*}
-\end{enumerate}
 \subsection*{Correction de la quatrième partie}
 \begin{enumerate}
     \item 
@@ -355,34 +357,6 @@ On notera \(p^{(k)}(x) = \P(S_k = x)\).
             \norm{p^{(k)}-\upsilon}_1^2 \le 2\frac{e^{-\frac{k\pi^2}{n^2}}}{1- e^{-\frac{3k\pi^2}{n^2}}}
         \end{equation*}
     \end{enumerate}
-    \subsection{Retour à l'origine}
-    On s'intéresse désormais à la probabilité de retour à l'origine dans \((\Z/2\Z)^n\), i.e. 
-    \begin{equation*}
-        \P(S_{k} = 0).
-    \end{equation*}
-    On suppose de plus que \(p(e_i) = \frac{1}{n+1}\) où \(e_0 = 0\) et \(e_i\) correspond 
-    au n-uplet de \(0\) sauf en la \(i\)-ième position où il vaut \(1\). Pour tout \(x\in (\Z/2\Z)^n\), on note
-    \(w(x)\) le nombre de \(1\) dans \(x\).
-    \begin{enumerate}
-        \item On note \(\mathcal{B}_m = \{x\in (\Z/2\Z)^n,w(x)= m\}\). Montrer que 
-        \begin{equation*}
-            \mathrm{card}(\mathcal{B}_m) = \binom{n}{m}.
-        \end{equation*}
-        \item Montrer que pour tout \((x_1,\dots,x_n)\), on a 
-        \begin{equation*}
-            \hat{p}(x) = \frac{1+n-2w(x)}{n+1} = 1 - \frac{2w(x)}{n+1}.
-        \end{equation*}
-        \item En déduire que pour tout \(k\in \N^*\), on a
-        \begin{equation*}
-            p^{(k)}(0) = \frac{1}{2^n}\sum_{m=0}^n \binom{n}{m} \left(1 - \frac{2m}{n+1}\right)^k.
-        \end{equation*}
-        \begin{align*}
-            \frac{1}{2^n}\sum_{m=0}^n \binom{n}{m} \left(1 - \frac{2m}{n+1}\right)^{2k} 
-            &\le \left(1-\frac{2}{n+1}\right)^k\frac{1}{2^n}\sum_{m=0}^n \binom{n}{m}\\
-            & = \left(1-\frac{2}{n+1}\right)^k.
-        \end{align*}
-    \end{enumerate}
-\end{enumerate}
 \subsection*{Correction de la cinquième partie}
 \begin{enumerate}
     \item Généralement, on considère deux variables aléatoires indépendantes \(X\) et \(Y\). 
