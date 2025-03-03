@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\title{Representation Theory}
+\author{Maxence Jauberty}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\begin{abstract}
+    This document gathers my personnal notes on representation theory of finite groups. 
+    It is mostly based on two references : The Symmetric Group by Bruce Sagan and Harmonic Analysis on Finite Groups by Ceccherini-Silberstein, Scarabotti and Tolli.
+\end{abstract}
+\section{Basic Definitions and Motivations}
+The notion of representation arises quite frequently in mathematics. Morally, a representation is 
+a way of saying that whatever the abstract object we are studying really is, it can be thought of 
+as a concrete object of that said stucture. In other words, our abstract definition probably
+catch the essence of the object we are studying. Representation theorems are usually great theorems.
+For example, Cayley's theorem says that every group can be thought as a subgroup of the permutation group.
+
+Here is an unformal definition of what we call a representation in mathematics. However, 
+representation theory is not that general and focus mainly on the structure of group actions.
+\begin{definition}
+    Let \(G\) be a group and \(X\) be a set. We say that \(G\) acts on \(X\) if there is a map
+    \[
+        G \times X \ni (g,x) \mapsto g \cdot x\in X
+    \]
+    such that 
+    \begin{enumerate}
+        \item \(e \cdot x = x\) for all \(x \in X\),
+        \item \(g \cdot (h \cdot x) = (gh) \cdot x\) for all \(g,h \in G\) and \(x \in X\).
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    \begin{enumerate}
+        \item The group \(\mathfrak{S}_n\) acts on the set \(\{x_1,\dots,x_n\}\) with the action defined by 
+        \begin{equation*}
+            \sigma \cdot x_i = x_{\sigma(i)}
+        \end{equation*}
+        \item The group \(\mathcal{GL}_n(\C)\) acts on a vector space \(V\) with the action defined by 
+        \begin{equation*}
+            \mathcal{GL}_n(\C)\times V\ni (A,v)\mapsto Av\in V
+        \end{equation*}
+    \end{enumerate}
+\end{example}
+The second example should bring a whole new intuition to the notion of group actions as a 
+generalization of the notion of linear transformations. In particular, it is easier to see that 
+\(X\) somehow inherits a structure from \(G\). Representation theory is all about studying 
+the action structure through concrete objects from linear algebra.
+\begin{definition}
+    A representation of \(G\) over a vector space \(V\) is an action of \(G\) on \(V\) defined by 
+    \begin{equation}
+        G \times V \ni (g,v) \mapsto \rho(g)v \in V
+    \end{equation}
+    where \(G\ni g \mapsto \rho(g)\in \mathcal{GL}_d\) is a group homomorphism.
+\end{definition}
+\section{Gelfand Pair}
+
+\end{document}
