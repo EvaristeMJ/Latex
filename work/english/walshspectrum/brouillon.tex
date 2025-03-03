@@ -1,4 +1,29 @@
-\documentclass[a4paper]{article}
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}{Remark}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\W}{\mathsf{W}}
+
 \title{On the Cardinal of the Support of Walsh for Functions of few Variables}
 \author{Maxence Jauberty}
 \begin{document}
@@ -10,5 +35,14 @@ spectral behavior of Boolean functions. The Walsh support of a Boolean functions
 as the set of points where the Walsh transform is nonzero, offers further structural information.
 Despite its signifiance, the Walsh support remains relatively underexplored.
 \section{Definitions}
-
+\begin{definition} Let \(f : \F^n_2 \to \F_2\) be a Boolean function and \(a\in \F_2^n\), 
+    the Walsh transform in \(a\) is defined as :
+    \begin{equation*}
+        \W_f(a) := \sum_{x\in\F_2^n}(-1)^{f(x)+a\cdot x},
+    \end{equation*}
+    and the Walsh support is:
+    \begin{equation*}
+        \W_{\mathrm{supp}}(f) := \{a\in \F_2^n,\;\W_f(a)\neq 0\}.
+    \end{equation*}
+\end{definition}
 \end{document}
