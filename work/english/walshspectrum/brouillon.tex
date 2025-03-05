@@ -15,7 +15,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}{Remark}
-
+\newcommand{\WS}{\mathcal{WS}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -45,4 +45,84 @@ Despite its signifiance, the Walsh support remains relatively underexplored.
         \W_{\mathrm{supp}}(f) := \{a\in \F_2^n,\;\W_f(a)\neq 0\}.
     \end{equation*}
 \end{definition}
+\begin{proposition}[Titsworth] Let \(f\in \mathcal{BF}_n\). We have for any \(a\neq 0\)
+    \begin{equation}
+        \sum_{b\in \F_2^n} \W(b)\W(a+b) = 0.
+    \end{equation}
+\end{proposition}
+\begin{proposition} For any \(n\in\mathbb{N}\) and any \(f\in\mathcal{BF}_n\), 
+    \begin{equation*}
+        \lvert \W_{\mathrm{supp}}(f) \rvert \neq 3.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Assume that \( \W_{\mathrm{supp}}(f) = \{a,b\}\) and denote \(c = a+b\). \(c\neq 0\), 
+    then we can apply Titsworth formula
+    \begin{equation*}
+        \sum_{u\in \F_2^n} \W_f(u)\W_f(c+u) = 0.
+    \end{equation*}
+    \(\W_f(u)\W_f(c+u)\neq 0\) if and only \(\W_f(u)\neq 0\) and \(\W_f(c+u)\neq 0\). This only happens 
+    if both quantities are in the support, i.e. \(u = a\) or \(u=b\), then
+    \begin{equation*}
+        \sum_{u\in \F_2^n} \W_f(u)\W_f(c+u) = 2\W_f(a)\W_f(b).
+    \end{equation*}
+    Hence, we have \(2\W_f(a)\W_f(b) = 0\). This leads to \(\W_f(a) = 0\) or \(\W_f(b) = 0\) which 
+    contradicts the definition of \(a\) and \(b\).
+\end{proof}
+\begin{proposition} For any \(n\in\mathbb{N}\) and any \(f\in\mathcal{BF}_n\), 
+    \begin{equation*}
+        \lvert \W_{\mathrm{supp}}(f) \rvert \neq 5.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Assume that \( \W_{\mathrm{supp}}(f) = \{a_1,a_2,a_3,a_4,a_5\}\). Set \(v = a_1+a_2\).
+    We can then apply Titsworth formula, we have then
+    \begin{equation*}
+        \sum_{u\in \F_2^n} \W_f(u)\W_f(v+u) = 0.
+    \end{equation*}
+    There are then two cases. Either \(\sum_{u\in \F_2^n} \W_f(u)\W_f(v+u) = 2\W_f(a_1)\W_f(a_2)+2\W_f(a_3)\W_f(a_4)\) (w.l.o.g.) or 
+    \(\sum_{u\in \F_2^n} \W_f(u)\W_f(v+u) = 2\W_f(a_1)\W_f(a_2)\). In the latter case, we would have \(\W_f(a_1)\W_f(a_2) = 0\), 
+    which contradicts the definition of \(a_1,a_2\). If \(\sum_{u\in \F_2^n} \W_f(u)\W_f(v+u) = 2\W_f(a_1)\W_f(a_2)+2\W_f(a_3)\W_f(a_4)\), then it means that 
+    \begin{equation*}
+        a_1 + a_2 + a_3 + a_4 = 0.
+    \end{equation*}
+    Indeed, there exists \(u\) in the spectrum such that \(u+v\) is also in the spectrum, we only 
+    chose to name \(a_3, a_4\) such that \(u+v = a_4\) and \(a_3 = u\). Therefore \(a_4 = a_1+a_2+a_3\). 
+    
+    Then, we do the same procedure with \(w=a_1+a_5\). We deduce that for some \(i,j\in\{2,3,4\}\), we have 
+    \begin{equation*}
+        a_1 + a_i + a_j + a_5 = 0.
+    \end{equation*} 
+    However, by the first equation, for any \(i,j\) there is some \(k\in\{2,3,4\}\) such that 
+    \begin{equation*}
+        a_1 + a_k = a_i+a_j.
+    \end{equation*}
+    Finally, we get \(a_1+a_1 + a_k + a_5 = 0\), hence \(a_5 = a_k\). That is a contradiction.
+\end{proof}
+\begin{definition} Denote \(\mathcal{WS}_n\) the set of Walsh supports of \(n-\)dimensional Boolean functions, i.e.
+    \begin{equation*}
+        \mathcal{WS}_n := \{\mathrm{Supp}(\W_f),\; f\in \mathcal{BF}_n\}.
+    \end{equation*}
+\end{definition}
+It has been shown that \(\mathcal{WS}_n\) has some structure.
+\begin{proposition} \(\label{wsproperty}\) Let \(n,m\in\N\), we have 
+    \begin{enumerate}
+        \item \(\WS_n\) is globally invariant under affine transformations,
+        \item \(\WS_n\times \WS_m \subset \WS_{n+m}\).
+    \end{enumerate}
+\end{proposition}
+\begin{definition} Let \(\mathcal{S}_{n}\) the set defined as 
+    \[\mathcal{S}_{n} =\{s\in \N,\; \exists f \in \mathcal{BF}_n, \lvert\mathrm{Supp}(\W_f)\rvert = s\}.\]
+\end{definition}
+\begin{proposition} Let \(n\in \N\). We have \(\mathcal{S}_n\subset \mathcal{S}_{n+1}\).
+\end{proposition}
+\begin{proof}
+    According to the assertion \(2\), \(\WS_n\times \WS_m \subset \WS_{n+m}\). In particular, we have 
+    \begin{equation*}
+        \WS_n\times \WS_1 \subset \WS_{n+1}.
+    \end{equation*}
+    Consider then \(f\) such that \(\lvert\mathrm{Supp}(\W_f)\rvert = s\) and let \(g\) be an affine function of \(\mathcal{BF}_1\). 
+    We have \(\mathrm{Supp}(\W_g) = \{a\}\). Then, \(\mathrm{Supp}(\W_f)\times \mathrm{Supp}(\W_g)\in \WS_{n+1}\) and 
+    \(\lvert\mathrm{Supp}(\W_f)\times \mathrm{Supp}(\W_g)\rvert = s\).
+\end{proof}
 \end{document}
